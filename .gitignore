@@ -1,0 +1,67 @@
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ------CLIENT------
+# dependencies
+/client/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/client/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+
+# -------BACKEND------
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Django
+*.log
+*.pot
+*.pyc
+media/
+staticfiles/
+.env
+*.env
+
+# IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env/
+*.egg-info/
+pip-log.txt
