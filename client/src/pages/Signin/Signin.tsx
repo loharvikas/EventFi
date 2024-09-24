@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import EventFiCard from '../../components/EventFiCard/EventFiCard';
-import TextField from '../../components/EventFiTextField/EventFiTextField';
+import EventFiTextField from '../../components/EventFiTextField/EventFiTextField';
 import EventFiButton from '../../components/EventFiButton/EventFiButton';
 import { BrandIcon } from '../../assets/icons/BrandLogo';
 import { Link } from 'react-router-dom';
@@ -77,7 +77,7 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
           >
             <FormControl>
               <FormLabel htmlFor="email" >Email</FormLabel>
-              <TextField
+              <EventFiTextField
                 error={emailError}
                 helperText={emailErrorMessage}
                 id="email"
@@ -103,7 +103,7 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
                   Forgot your password?
                 </a>
               </Box>
-              <TextField
+              <EventFiTextField
                 error={passwordError}
                 helperText={passwordErrorMessage}
                 name="password"

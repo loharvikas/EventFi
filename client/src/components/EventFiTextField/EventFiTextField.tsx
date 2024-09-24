@@ -2,7 +2,7 @@ import MuiTextField from "@mui/material/TextField";
 import { styled } from '@mui/material/styles';
 import { TextFieldProps } from '@mui/material/TextField'; 
 
-const TextField = styled(MuiTextField)<TextFieldProps>(({ theme }) => ({
+const EventFiTextField = styled(MuiTextField)<TextFieldProps>(({ theme }) => ({
     display: 'flex',
     borderRadius: 8,
 
@@ -19,4 +19,4 @@ const TextField = styled(MuiTextField)<TextFieldProps>(({ theme }) => ({
     }),
 }));
 
-export default TextField;
+export default EventFiTextField;
