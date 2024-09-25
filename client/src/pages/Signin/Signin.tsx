@@ -8,7 +8,10 @@ import EventFiCard from '../../components/EventFiCard/EventFiCard';
 import EventFiTextField from '../../components/EventFiTextField/EventFiTextField';
 import EventFiButton from '../../components/EventFiButton/EventFiButton';
 import { BrandIcon } from '../../assets/icons/BrandLogo';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
+import { loginUser } from '../../store/modules/user/slice';
 
 
 export default function Signin(props: { disableCustomTheme?: boolean }) {
@@ -17,14 +20,20 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
 
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    await dispatch(loginUser(
+      {
+        email: data.get('email') as string,
+        password: data.get('password') as string,
+      }
+    ))
+    navigate('/')
   };
 
   const validateInputs = () => {
@@ -126,6 +135,7 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
               variant="contained"
               onClick={validateInputs}
               label='Sign in'
+              
             />
              
             <Typography sx={{ textAlign: 'center' }}>

@@ -1,3 +1,4 @@
+import { grey } from '@mui/material/colors';
 import { createTheme, ThemeOptions } from '@mui/material/styles';
 
 export const brand = {
@@ -82,17 +83,17 @@ const designSystem: ThemeOptions = {
       lineHeight: 1.2,
     },
     h3: {
-      fontSize: '30px', // Updated
+      fontSize: '30px', 
       fontWeight: 600,
       lineHeight: 1.2,
     },
     h4: {
-      fontSize: '24px', // Updated
+      fontSize: '24px', 
       fontWeight: 600,
       lineHeight: 1.5,
     },
     h5: {
-      fontSize: '20px', // Updated
+      fontSize: '20px', 
       fontWeight: 600,
     },
     h6: {
@@ -100,11 +101,10 @@ const designSystem: ThemeOptions = {
       fontWeight: 600,
     },
     subtitle1: {
-      fontSize: '18px', // Updated
+      fontSize: '18px', 
     },
     subtitle2: {
-      fontSize: '12px', // Updated
-      fontWeight: 600,
+      fontSize: '12px', 
     },
     body1: {
       fontSize: '14px', // Updated
@@ -116,11 +116,10 @@ const designSystem: ThemeOptions = {
     caption: {
       fontSize: '12px', // Updated
       fontWeight: 400,
-
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 4,
   },
   palette: {
     primary: {
@@ -155,8 +154,9 @@ const designSystem: ThemeOptions = {
     },
     divider: 'rgba(0, 0, 0, 0.1)',
     background: {
-      default: 'hsl(0, 0%, 99%)',
-      paper: 'hsl(220, 35%, 97%)',
+      
+      default: 'hsl(220, 35%, 97%)',
+      paper: 'hsl(0, 0%, 99%)',
     },
     text: {
       primary: gray[800],
@@ -168,17 +168,10 @@ const designSystem: ThemeOptions = {
     },
   },
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-        },
-      },
-    },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
+          borderRadius: 8,
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         },
       },
@@ -195,11 +188,42 @@ const designSystem: ThemeOptions = {
       styleOverrides: {
         root: {
           marginBottom: 8,
-          fontSize: '12px',
+          fontSize: '0.9rem',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        }
+      }
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: 4, // Customize as per your design system
+          padding: '0.1rem 0.5rem',
+          marginBottom: '0.5rem',
+          '&.active': {
+            backgroundColor: grey[100]
+          },
+          '&:hover': {
+            backgroundColor: grey[100], // Active background color
+          },
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          fontWeight: 600, // Customize text weight
+          fontSize: '1rem', // Customize font size
         },
       },
     },
   },
+  
 };
 
 const theme = createTheme(designSystem);

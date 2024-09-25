@@ -4,12 +4,11 @@ import { TextFieldProps } from '@mui/material/TextField';
 
 const EventFiTextField = styled(MuiTextField)<TextFieldProps>(({ theme }) => ({
     display: 'flex',
-    borderRadius: 8,
 
     '& .MuiInputBase-input': {
-        fontSize: '14px', // Or adjust as desired
+        fontSize: '0.900rem',  // Or adjust as desired
         fontWeight: 500, // Or adjust as desired,
-        height:'8px'
+        height: theme.spacing(0.5)
       },
     '& .MuiOutlinedInput-root': {
         borderRadius: 8,

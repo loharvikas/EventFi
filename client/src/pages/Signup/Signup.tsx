@@ -8,7 +8,10 @@ import EventFiCard from '../../components/EventFiCard/EventFiCard';
 import EventFiTextField from '../../components/EventFiTextField/EventFiTextField';
 import EventFiButton from '../../components/EventFiButton/EventFiButton';
 import { BrandIcon } from '../../assets/icons/BrandLogo';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
+import { registerUser } from '../../store/modules/user/slice';
 
 
 export default function Singup(props: { disableCustomTheme?: boolean }) {
@@ -16,20 +19,31 @@ export default function Singup(props: { disableCustomTheme?: boolean }) {
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
+  const [numberError, setNumberError] = React.useState(false);
+  const [numberErrorMessage, setNumberErrorMessage] = React.useState('');
 
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate();
+  
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const response = await dispatch(registerUser({
+      email: data.get('email') as string,
+      password: data.get('password') as string,
+      phone_number: data.get('number') as string,
+    })).unwrap();
+    if (response) {
+      navigate('/signin');
+      return;
+    }
   };
 
   const validateInputs = () => {
     const email = document.getElementById('email') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
+    const number = document.getElementById('number') as HTMLInputElement;
 
     let isValid = true;
 
@@ -50,6 +64,14 @@ export default function Singup(props: { disableCustomTheme?: boolean }) {
       setPasswordError(false);
       setPasswordErrorMessage('');
     }
+    if (!number.value || number.value.length < 10) {
+       setNumberError(true);
+       setNumberErrorMessage('Phone number must be at least 10 characters long.');
+       isValid = false;
+      } else {
+        setNumberError(false);
+        setNumberErrorMessage('');
+      }
 
     return isValid;
   };
@@ -97,14 +119,16 @@ export default function Singup(props: { disableCustomTheme?: boolean }) {
                 <EventFiTextField
                   id="number"
                   type="number"
-                  name="name"
+                  name="number"
                   placeholder="8980800000"
                   autoFocus
                   required
                   fullWidth
                   variant="outlined"
-                  color={emailError ? 'error' : 'primary'}
-                  sx={{ ariaLabel: 'email' }}
+                  color={numberError ? 'error' : 'primary'}
+                  helperText={numberErrorMessage}
+                  error={numberError}
+                  sx={{ ariaLabel: 'number' }}
                 />
               </FormControl>
             <FormControl>

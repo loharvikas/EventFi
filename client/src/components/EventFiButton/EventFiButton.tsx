@@ -4,13 +4,11 @@ import Button, { ButtonProps } from '@mui/material/Button';
 
 interface EventFiCardProps extends ButtonProps {
     label: string;
+
 }
 
 
 const  EventFiButton = (props: EventFiCardProps) => {
-
-
-
       const StyledButton = styled(Button)<ButtonProps>(({ theme, ...props }) => {
         
         const variantStyles: Record<string, any> = {
@@ -21,13 +19,18 @@ const  EventFiButton = (props: EventFiCardProps) => {
                 hoverBackgroundColor: theme.palette.grey[700],
                 activeBackgroundColor: theme.palette.grey[800],
               },
-              outlined: {
-                color: theme.palette.grey[900],
-                border: `1px solid ${theme.palette.grey[300]}`,
-                backgroundColor: theme.palette.grey[100],
-                hoverBackgroundColor: theme.palette.grey[200],
-                activeBackgroundColor: theme.palette.primary.dark,
-              }
+            outlined: {
+              color: theme.palette.grey[900],
+              border: `1px solid ${theme.palette.grey[300]}`,
+              backgroundColor: theme.palette.grey[100],
+              hoverBackgroundColor: theme.palette.grey[200],
+              activeBackgroundColor: theme.palette.primary.dark,
+            },
+            text: {
+              color: theme.palette.grey[900],
+              hoverBackgroundColor: theme.palette.grey[50],
+              activeBackgroundColor: theme.palette.primary.dark,
+            }
         }
         const styles = variantStyles[props.variant || 'contained'];
 
@@ -38,10 +41,9 @@ const  EventFiButton = (props: EventFiCardProps) => {
           alignItems: 'center',
           height: '40px',
           boxShadow: 'none',
-          fontSize: '1rem',
+          fontSize: '0.8rem',
           fontWeight: 520,
           color: styles.color,
-          transition: 'all 100ms ease-in',
           border: styles.border,
           backgroundColor: styles.backgroundColor,
           '&:hover': {
@@ -49,9 +51,10 @@ const  EventFiButton = (props: EventFiCardProps) => {
             backgroundColor: styles.hoverBackgroundColor,
             boxShadow: 'none',
           },
-          '&:active': {
-            backgroundColor: styles.activeBackgroundColor,
-          },
+          '&:active, &:focus': {
+            backgroundColor: styles.hoverBackgroundColor,
+            boxShadow: 'none',
+          }
         };
       });
 
@@ -59,6 +62,7 @@ const  EventFiButton = (props: EventFiCardProps) => {
     return (
         <StyledButton 
             {...props}
+            disableRipple
         >
             <Typography variant="subtitle2">
             {props.label}</Typography>
