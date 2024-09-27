@@ -1,3 +1,4 @@
+import { alpha, outlinedInputClasses } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { createTheme, ThemeOptions } from '@mui/material/styles';
 
@@ -154,9 +155,9 @@ const designSystem: ThemeOptions = {
     },
     divider: 'rgba(0, 0, 0, 0.1)',
     background: {
-      
       default: 'hsl(220, 35%, 97%)',
       paper: 'hsl(0, 0%, 99%)',
+
     },
     text: {
       primary: gray[800],
@@ -165,6 +166,8 @@ const designSystem: ThemeOptions = {
     action: {
       hover: 'rgba(0, 0, 0, 0.08)',
       selected: 'rgba(0, 0, 0, 0.12)',
+      selectedOpacity: 0.08,
+      
     },
   },
   components: {
@@ -176,22 +179,77 @@ const designSystem: ThemeOptions = {
         },
       },
     },
-    MuiInputBase: {
-      styleOverrides: {
-        root: {
-          border: 'none',
-          fontWeight: 600,
+  MuiInputBase: {
+    styleOverrides: {
+      root: {
+        border: 'none',
+      },
+      input: {
+        '&::placeholder': {
+          opacity: 0.7,
+          color: gray[500],
         },
       },
     },
-    MuiFormLabel: {
-      styleOverrides: {
-        root: {
-          marginBottom: 8,
-          fontSize: '0.9rem',
+  },
+  MuiOutlinedInput: {
+    styleOverrides: {
+      input: {
+        padding: 6,
+      },
+      root: ({ theme }) => ({
+        padding: '8px 12px',
+        color: theme.palette.text.primary,
+        borderRadius: theme.shape.borderRadius,
+        border: `1px solid ${theme.palette.divider}`,
+        backgroundColor: theme.palette.background.default,
+        transition: 'border 120ms ease-in',
+        '&:hover': {
+          borderColor: gray[400],
         },
+        [`&.${outlinedInputClasses.focused}`]: {
+          outline: `3px solid ${alpha(brand[500], 0.5)}`,
+          borderColor: brand[400],
+        },
+        variants: [
+          {
+            props: {
+              size: 'small',
+            },
+            style: {
+              height: '2.25rem',
+            },
+          },
+          {
+            props: {
+              size: 'medium',
+            },
+            style: {
+              height: '2.5rem',
+            },
+          },
+        ],
+      }),
+      notchedOutline: {
+        border: 'none',
       },
     },
+  },
+  MuiInputAdornment: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        color: theme.palette.grey[500],
+      }),
+    },
+  },
+  MuiFormLabel: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        typography: theme.typography.caption,
+        marginBottom: 8,
+      }),
+    },
+  },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -222,6 +280,7 @@ const designSystem: ThemeOptions = {
         },
       },
     },
+  
   },
   
 };

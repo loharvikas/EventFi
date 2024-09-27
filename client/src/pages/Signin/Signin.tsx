@@ -138,9 +138,9 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
               
             />
              
-            <Typography sx={{ textAlign: 'center' }}>
+            <Typography sx={{ textAlign: 'center',  }}>
               Don&apos;t have an account?{' '}
-              <span>
+              <span >
                 <Link
                   to='/signup'
                 >

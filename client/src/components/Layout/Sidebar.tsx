@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ items }) => {
           </NavLink>
         ))}
       </List>
-      <Box sx={{ mt: 'auto', p: 2, borderTop: '1px solid', borderColor: 'divider' }}>
+      <Box sx={{ mt: 'auto', borderTop: '1px solid', borderColor: 'divider', padding:'1rem 0.5rem' }}>
         <BrandIcon />
       </Box>
     </Box>

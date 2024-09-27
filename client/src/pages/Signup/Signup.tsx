@@ -158,12 +158,12 @@ export default function Singup(props: { disableCustomTheme?: boolean }) {
               fullWidth
               variant="contained"
               onClick={validateInputs}
-              label='Sign in'
+              label='Sign up'
             />
              
             <Typography sx={{ textAlign: 'center' }}>
               Already registered?{' '}
-              <span>
+              <span color='primary.main' >
                 <Link
                   to={'/'}
                 >
