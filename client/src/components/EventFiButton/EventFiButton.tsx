@@ -45,6 +45,7 @@ const  EventFiButton = (props: EventFiCardProps) => {
           fontWeight: 520,
           color: styles.color,
           border: styles.border,
+          margin:'0.5rem 0',
           backgroundColor: styles.backgroundColor,
           '&:hover': {
             backgroundImage: 'none',
