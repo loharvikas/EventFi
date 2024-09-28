@@ -9,48 +9,25 @@ const EventFiTable = (props:EventFiTableProps) => {
     const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
         [`& .${gridClasses.root}`]: {
             width: '100%',
-            maxHeight:'100vh',
-            overflow: 'auto',
-            border:'none',
         },
-        border:'none'
+        height:'100vh',
+        maxHeight:'100vh',
+        border:'none',
+        overflow: 'scroll',
+        '& .MuiDataGrid-columnHeaderTitle': {
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            color: theme.palette.grey[700],
+        },
         }));
     return (
         <StripedDataGrid
-            autoHeight
             rows={props.rows}
             columns={props.columns}
-            getRowClassName={(params) =>
-                params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
-            }
+            columnHeaderHeight={36} 
             disableColumnResize
-            density="compact"
-            slotProps={{
-                filterPanel: {
-                filterFormProps: {
-                    logicOperatorInputProps: {
-                    variant: 'outlined',
-                    size: 'small',
-                    },
-                    columnInputProps: {
-                    variant: 'outlined',
-                    size: 'small',
-                    sx: { mt: 'auto' },
-                    },
-                    operatorInputProps: {
-                    variant: 'outlined',
-                    size: 'small',
-                    sx: { mt: 'auto' },
-                    },
-                    valueInputProps: {
-                    InputComponentProps: {
-                        variant: 'outlined',
-                        size: 'small',
-                    },
-                    },
-                },
-                },
-        }}
+            hideFooterPagination
+            hideFooter
         />
     );
 }

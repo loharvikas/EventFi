@@ -17,10 +17,10 @@ export default function EventFiModal(props:EventFiModalProps) {
     >
         <Box sx={{
             position: 'absolute',
-            top: '50%',
+            top: '40%',
             left: '50%',
             display: 'block',
-            transform: 'translate(-50%, -50%)',
+            transform: 'translate(-30%, -50%)',
         }}>
             {props.children}
         </Box>

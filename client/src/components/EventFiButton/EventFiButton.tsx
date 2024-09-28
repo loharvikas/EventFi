@@ -36,7 +36,7 @@ const  EventFiButton = (props: EventFiCardProps) => {
 
         return {
           display: 'flex',
-          borderRadius: '8px',
+          borderRadius: '6px',
           justifyContent: 'center',
           alignItems: 'center',
           height: '40px',
@@ -65,7 +65,7 @@ const  EventFiButton = (props: EventFiCardProps) => {
             {...props}
             disableRipple
         >
-            <Typography variant="subtitle2">
+            <Typography variant="body2" >
             {props.label}</Typography>
         </StyledButton>
     )
