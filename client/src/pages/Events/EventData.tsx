@@ -1,11 +1,15 @@
-import { GridColDef } from "@mui/x-data-grid";
+import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { Event } from '../../types/event';
 import EventFiTable from "../../components/EventFiTable/EventFiTable";
+import { Avatar, Stack, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 
 const EventData = () => {
     const columns: GridColDef[] = [
-        { field: 'eventName', headerName: 'Event Name', width: 200 },
+        { field: 'eventName', headerName: 'Event Name', width: 200, renderCell: (params:GridRenderCellParams) => {
+            return (<Link to={`/events/${params.id}`}>{params.value}</Link>)
+        } },
         { field: 'eventDate', headerName: 'Event Date', width: 130 },
         { field: 'addressLine1', headerName: 'Address Line 1', flex:2, },
         { field: 'addressLine2', headerName: 'Address Line 2', width: 200 },
@@ -53,3 +57,4 @@ const EventData = () => {
 }
 
 export default EventData;
+
