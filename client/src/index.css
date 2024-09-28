@@ -17,3 +17,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+a:hover {
+  text-decoration: underline;
+}
+
+.nav-link:hover, .nav-link-pending:hover, .nav-link-active:hover {
+  text-decoration: none;
+}
+

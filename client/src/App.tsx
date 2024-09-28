@@ -11,16 +11,21 @@ import PrivateRoute from './router/PrivateRoute';
 import Home from './pages/Home/Home';
 import PublicRoute from './router/PublicRoute';
 import Layout from './components/Layout/Layout';
-import Events from './pages/Events/Events';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Settings from './pages/Settings/Settings';
+import Events from './pages/Events/Index';
+import EventModule from './pages/Events/Module/Index';
+import Contribute from './pages/Contribute/Contribute';
 
 
 function App() {
   const sidebarItems = [
     { text: 'Dashboard', path: '/dashboard' },
     { text: 'Events', path: '/events' },
-    { text: 'Settings', path: '/settings' },
+    { text: 'Overview', path: '/settings' },
+    { text: 'Reports', path: '/settings' },
+    { text: 'Profile', path: '/settings' },
+    { text: 'Settings', path: '/contribute' },
   ]; 
   return (
       <Routes>
@@ -30,8 +35,10 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/events/:id" element={<EventModule />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
+          <Route path="/contribute" element={<Contribute />} />
           </Route>
           <Route element={<PublicRoute />}>
             <Route path="signin" element={<Signin />} />

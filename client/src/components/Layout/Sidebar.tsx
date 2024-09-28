@@ -28,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({ items }) => {
             to={item.path}
             key={index}
             className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "active" : ""
+                isPending ? "nav-link-pending" : isActive ? "nav-link-active" : "nav-link"
             }
           >
             <ListItem >

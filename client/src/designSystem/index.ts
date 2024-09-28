@@ -103,9 +103,12 @@ const designSystem: ThemeOptions = {
     },
     subtitle1: {
       fontSize: '18px', 
+      color: gray[500],
+
     },
     subtitle2: {
       fontSize: '12px', 
+      color: gray[500],
     },
     body1: {
       fontSize: '14px', // Updated
@@ -162,12 +165,13 @@ const designSystem: ThemeOptions = {
     text: {
       primary: gray[800],
       secondary: gray[600],
+      disabled: gray[100],
     },
     action: {
       hover: 'rgba(0, 0, 0, 0.08)',
       selected: 'rgba(0, 0, 0, 0.12)',
       selectedOpacity: 0.08,
-      
+
     },
   },
   components: {
@@ -280,8 +284,10 @@ const designSystem: ThemeOptions = {
         },
       },
     },
-  
+   
+    
   },
+
   
 };
 
