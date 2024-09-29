@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['*']
 
 CUSTOM_APPS = [
     'user.apps.UserConfig',
+    'event.apps.EventConfig',
+    'guest.apps.GuestConfig',
 ]
 
 THIRD_PARTY_APPS = [
