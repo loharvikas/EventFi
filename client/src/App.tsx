@@ -16,16 +16,17 @@ import Settings from './pages/Settings/Settings';
 import Events from './pages/Events/Index';
 import EventModule from './pages/Events/Module/Index';
 import Contribute from './pages/Contribute/Contribute';
+import { CalendarDays } from 'lucide-react';
 
 
 function App() {
   const sidebarItems = [
-    { text: 'Dashboard', path: '/dashboard' },
-    { text: 'Events', path: '/events' },
-    { text: 'Overview', path: '/settings' },
-    { text: 'Reports', path: '/settings' },
-    { text: 'Profile', path: '/settings' },
-    { text: 'Settings', path: '/contribute' },
+    { text: 'Dashboard', path: '/dashboard', icon:<CalendarDays />},
+    { text: 'Events', path: '/events', icon:<CalendarDays /> },
+    { text: 'Overview', path: '/settings',icon:<CalendarDays /> },
+    { text: 'Reports', path: '/settings', icon:<CalendarDays /> },
+    { text: 'Profile', path: '/settings', icon:<CalendarDays /> },
+    { text: 'Settings', path: '/contribute', icon:<CalendarDays /> },
   ]; 
   return (
       <Routes>

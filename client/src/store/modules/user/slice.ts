@@ -55,7 +55,6 @@ export const loginUser = createAsyncThunk(
   async (user: UserLoginPayload, { rejectWithValue }) => {
     try {
       const response = await userApi.loginUser(user);
-      console.log('--SDASDas---', response)
       return response.data;
     } catch (error: any) {
       throw new Error(error.message);
@@ -85,7 +84,6 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action: PayloadAction<UserLoginRespone>) => {
         state.login.status = requestState.success;
-        console.log('---ACCTION---', action.payload)
         Cookies.set('refresh_token', JSON.stringify(action.payload.refresh));
         Cookies.set('access_token', action.payload.access);
       })

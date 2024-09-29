@@ -12,11 +12,11 @@ const Events = () => {
     const [openEventForm, setOpenEventForm] = useState<boolean>(false);
     return (
         <Box >
-            <Stack direction="row" justifyContent="space-between" alignItems="center" borderBottom={1} borderColor="divider" paddingTop={0.5} paddingBottom={0.5} paddingLeft={1} paddingRight={1}>
+            <Stack direction="row" justifyContent="space-between" alignItems="center" borderBottom={1} borderColor="divider" paddingTop={0.5} paddingBottom={0.5} >
                 <Stack>
-                    <Typography variant="subtitle1">Events</Typography>
+                    <Typography variant="h6" >Events</Typography>
                 </Stack>
-                <Stack width={'100px'}>
+                <Stack width={'150px'}>
                     <EventFiButton label="Create Event"   onClick={() => setOpenEventForm(true)} />
                 </Stack>
             </Stack>

@@ -1,34 +1,53 @@
 import { DataGrid, DataGridProps, gridClasses } from '@mui/x-data-grid';
-import { alpha, styled } from '@mui/material';
+import { alpha, Box, styled } from '@mui/material';
 
 interface EventFiTableProps extends DataGridProps {
+    tableHeight?:string;
 }
 
 const EventFiTable = (props:EventFiTableProps) => {
 
-    const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
-        [`& .${gridClasses.root}`]: {
-            width: '100%',
+    const StripedDataGrid = styled(DataGrid)<DataGridProps>(({ theme }) => ({
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        background: 'white',
+        overflow:'scroll',
+        margin: '8px 0px',
+        borderRadius: '8px',
+        '& .MuiFormGroup-options': {
+          alignItems: 'center',
+          paddingBottom: theme.spacing(1),
+          '& > div': {
+            minWidth: 100,
+            margin: theme.spacing(2),
+            marginLeft: 0,
+          },
         },
-        height:'100vh',
-        maxHeight:'100vh',
-        border:'none',
-        overflow: 'scroll',
-        '& .MuiDataGrid-columnHeaderTitle': {
-            fontSize: '0.8rem',
-            fontWeight: 600,
-            color: theme.palette.grey[700],
-        },
+        '& .MuiDataGrid-columnHeader': {
+            color:'black',
+            backgroundColor: 'background.paper',
+
+            '& .MuiDataGrid-columnHeaderTitle': {
+                fontWeight: 'bold',
+            }
+          }
         }));
     return (
-        <StripedDataGrid
-            rows={props.rows}
-            columns={props.columns}
-            columnHeaderHeight={36} 
-            disableColumnResize
-            hideFooterPagination
-            hideFooter
-        />
+        <Box sx={{
+            height: props.tableHeight || '70vh',
+            maxWidth:'90vw',
+            overflow: '',
+        }}>
+            <StripedDataGrid
+                rows={props.rows}
+                columns={props.columns}
+                columnHeaderHeight={40} 
+                disableColumnResize
+                hideFooterPagination
+                hideFooter
+            />
+        </Box>
     );
 }
 

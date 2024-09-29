@@ -9,4 +9,5 @@ export interface Event {
     zipCode: number;
     country: string;
     guestCount: number;
+    contributors?: string[];
   }

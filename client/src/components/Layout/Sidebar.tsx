@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { BrandIcon } from '../../assets/icons/BrandLogo';
 
 interface SidebarProps {
-  items: { text: string; path: string }[];
+  items: { text: string; path: string, icon:React.ReactNode }[];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ items }) => {
@@ -24,17 +24,18 @@ const Sidebar: React.FC<SidebarProps> = ({ items }) => {
       </Stack>
       <List>
         {items.map((item, index) => (
-          <NavLink
-            to={item.path}
-            key={index}
-            className={({ isActive, isPending }) =>
-                isPending ? "nav-link-pending" : isActive ? "nav-link-active" : "nav-link"
-            }
-          >
-            <ListItem >
-              <ListItemText primary={item.text} />
-            </ListItem>
-          </NavLink>
+            <NavLink
+              to={item.path}
+              key={index}
+              className={({ isActive, isPending }) =>
+                  isPending ? "nav-link-pending" : isActive ? "nav-link-active" : "nav-link"
+              }
+              
+            >
+              <ListItem >
+                <ListItemText primary={item.text} />
+              </ListItem>
+            </NavLink>
         ))}
       </List>
       <Box sx={{ mt: 'auto', borderTop: '1px solid', borderColor: 'divider', padding:'1rem 0.5rem' }}>

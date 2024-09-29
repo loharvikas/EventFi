@@ -132,7 +132,7 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
             <EventFiButton
               type="submit"
               fullWidth
-              variant="contained"
+              variant="outlined"
               onClick={validateInputs}
               label='Sign in'
               
@@ -144,7 +144,7 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
                 <Link
                   to='/signup'
                 >
-                  Sign up
+                  Register
                 </Link>
               </span>
             </Typography>

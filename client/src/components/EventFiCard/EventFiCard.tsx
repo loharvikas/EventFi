@@ -8,6 +8,8 @@ interface EventFiCardProps extends CardProps {
   boxShadow?: string;
   background?:string;
   color?:string;
+  border?:string;
+  borderColor?:string;
 }
 
 const EventFiCard = (props:EventFiCardProps)  => {
@@ -26,6 +28,8 @@ const EventFiCard = (props:EventFiCardProps)  => {
     background: props.background || 'background.paper',
     borderRadius: theme.spacing(2),
     color: props.color || 'inherit',
+    border: props.border || 'none',
+    borderColor: theme.palette.grey[300],
   }));
   return <StyledCard>
     {props.children}

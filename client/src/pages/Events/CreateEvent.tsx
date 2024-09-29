@@ -23,7 +23,7 @@ const EventCreationForm = () => {
   };
 
   return (
-    <EventFiCard variant="outlined">
+    <EventFiCard variant='outlined'>
     <Typography variant="h5">Create event</Typography>
     <Box
       component="form"
@@ -131,7 +131,7 @@ const EventCreationForm = () => {
           </FormControl>
         </Grid>
         <Grid item xs={12}>
-          <EventFiButton type="submit" fullWidth variant="contained" label='Create event' />
+          <EventFiButton type="submit" fullWidth variant="contained" label='Create event' loading={true} loadingPosition='start'/>
         </Grid>
       </Grid>
     </Box>
