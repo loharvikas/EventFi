@@ -7,6 +7,7 @@ class Guest(EventFiBaseModel):
     email = models.EmailField()
     name = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='guests')
 
     class Meta:
         unique_together = ('email', 'name', 'phone_number')

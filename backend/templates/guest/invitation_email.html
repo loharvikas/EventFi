@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Invited!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ff4da6;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+        h1 {
+            color: #fff700;
+        }
+        p {
+            font-size: 16px;
+            color: #ffffff;
+        }
+        .button {
+            padding: 12px 25px;
+            background-color: #00c4ff;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello {{ guest_name }}, You're Invited!</h1>
+    <p>You have been invited to contribute to <strong>{{ event_name }}</strong>!</p>
+    <p>Click the button below to contribute to the event.</p>
+    <a href="{{ contribution_url }}" class="button">Contribute Now</a>
+    <p>Looking forward to seeing you there!</p>
+</body>
+</html>

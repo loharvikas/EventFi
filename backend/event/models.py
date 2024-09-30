@@ -9,6 +9,7 @@ class Event(EventFiBaseModel):
     name = models.CharField(max_length=255)
     date = models.DateField()
     address = models.CharField(max_length=255)
+    address_line2 = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     zip_code = models.CharField(max_length=255)

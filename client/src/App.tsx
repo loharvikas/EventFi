@@ -16,19 +16,23 @@ import Settings from './pages/Settings/Settings';
 import Events from './pages/Events/Index';
 import EventModule from './pages/Events/Module/Index';
 import Contribute from './pages/Contribute/Contribute';
-import { CalendarDays } from 'lucide-react';
+import { Blend, Bolt, BookOpen,  CircleDashed, LayoutDashboard, Settings as SettingsIcon } from 'lucide-react';
+import Payment from './pages/Contribute/Payment';
+import EventFiAlert from './components/EventFIAlert/EventFiAlert';
 
 
 function App() {
   const sidebarItems = [
-    { text: 'Dashboard', path: '/dashboard', icon:<CalendarDays />},
-    { text: 'Events', path: '/events', icon:<CalendarDays /> },
-    { text: 'Overview', path: '/settings',icon:<CalendarDays /> },
-    { text: 'Reports', path: '/settings', icon:<CalendarDays /> },
-    { text: 'Profile', path: '/settings', icon:<CalendarDays /> },
-    { text: 'Settings', path: '/contribute', icon:<CalendarDays /> },
+    { text: 'Dashboard', path: '/dashboard', icon:<LayoutDashboard height={20} width={20} /> },
+    { text: 'Events', path: '/events', icon:<CircleDashed height={20} width={20} /> },
+    { text: 'Overview', path: '/overview',icon:<Blend height={20} width={20} /> },
+    { text: 'Contribution', path: '/contribute', icon:<Bolt height={20} width={20} /> },
+    { text: 'Reports', path: '/reports', icon:<BookOpen height={20} width={20} />},
+    { text: 'Settings', path: '/settings', icon:<SettingsIcon height={20} width={20} /> },
   ]; 
   return (
+    <>
+      <EventFiAlert />
       <Routes>
         <Route path="/">
           <Route element={<PrivateRoute />}>
@@ -39,14 +43,16 @@ function App() {
             <Route path="/events/:id" element={<EventModule />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
-          <Route path="/contribute" element={<Contribute />} />
           </Route>
+          <Route path="events/:id/:guestId/contribute" element={<Contribute />} />
+          <Route path="events/:id/:guestId/contribute/pay" element={<Payment />} />
           <Route element={<PublicRoute />}>
             <Route path="signin" element={<Signin />} />
             <Route path="signup" element={<Singup />} />
           </Route>
         </Route>
       </Routes>
+    </>
   );
 }
 

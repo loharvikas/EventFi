@@ -16,7 +16,7 @@ class UserService:
     def create(cls, email:str, phone_number:str, password:str) -> User:
         if User.objects.filter(email=email).exists():
             raise ExceptionUserAlreadyExists
-        user = User.objects.create_user(email=email, phone_number=phone_number)
+        user = User.objects.create_user(email=email,password=password, phone_number=phone_number)
         return user
     
     @classmethod

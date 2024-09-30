@@ -5,7 +5,7 @@ from core.models.base import EventFiBaseModel
 from .manager import UserManager
 # Create your models here.
 
-class User(AbstractBaseUser, EventFiBaseModel, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     '''
     User model
     '''
@@ -17,7 +17,6 @@ class User(AbstractBaseUser, EventFiBaseModel, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'  # Use email for login validation
-    REQUIRED_FIELDS = ['name',]  # Required fields during superuser creation
 
     def __str__(self):
         return self.email

@@ -9,6 +9,10 @@ djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 pyjwt = "*"
 django-cors-headers = "*"
+django-sendgrid = "*"
+django-sendgrid-v5 = "*"
+certifi = "*"
+resend = "*"
 
 [dev-packages]
 

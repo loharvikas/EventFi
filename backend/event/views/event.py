@@ -1,25 +1,35 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from guest.serializers.guest import ContributionSerializer
+from guest.services.guest import ContributionService
 from event.services.event import EventService
 from event.serializers.event import EventCreateSerializer, EventUpdateSerializer, EventRetrieveSerializer
 
 class EventCreateView(APIView):
 
-    def post(self, request):
+    def get(self, request, *args, **kwargs):
+
+        events = EventService.get_all()
+        serializer = EventRetrieveSerializer(events, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
         serializer = EventCreateSerializer(data=request.data)
         if serializer.is_valid():
+            print('---REQUEST DATA--', request.user)
             event = EventService.create(
-                created_by=request.user
+                created_by=request.user,
                 **serializer.validated_data
             )
-            return Response({"id": str(event.id)}, status=status.HTTP_201_CREATED)
+            serializer = EventRetrieveSerializer(event)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class EventRetrieveUpdateDeleteView(APIView):
 
-    def get(self, request, event_id):
+    def get(self, request, event_id, *args, **kwargs):
         event = EventService.get_event_by_id(event_id)
         if not event:
             return Response({"detail": "Event not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -27,7 +37,7 @@ class EventRetrieveUpdateDeleteView(APIView):
         serializer = EventRetrieveSerializer(event)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def put(self, request, event_id):
+    def put(self, request, event_id, *args, **kwargs):
         serializer = EventUpdateSerializer(data=request.data)
         if serializer.is_valid():
             updated_event = EventService.update(
@@ -38,6 +48,23 @@ class EventRetrieveUpdateDeleteView(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, event_id):
+    def delete(self, request, event_id, *args, **kwargs):
         EventService.delete(event_id)
         return Response({"detail": "Event deleted"}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+class EventTopContributorView(APIView):
+    def get(self, request, event_id:str,):
+        top_contributions = ContributionService.top_contributor(event_id)
+        serializer = ContributionSerializer(top_contributions, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+
+class EventContributionsView(APIView):
+    def get(self, request, event_id:str,):
+        top_contributions = ContributionService.get_contributions_by_event(event_id)
+        serializer = ContributionSerializer(top_contributions, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

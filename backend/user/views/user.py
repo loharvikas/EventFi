@@ -8,13 +8,10 @@ from user.services.user import UserService
 
 class RegisterAPIVIew(APIView):
     def post(self, request: Request, *args, **kwargs) -> Response:
-        print('---YES----', request.data)
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
-            print('---NOT--VALID--',)
             user = UserService.create(**serializer.validated_data)
             response = UserService.get_token(user)
-            print('--RESPONSE--', response)
             return Response(RegisterResponseSerializer(response).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
