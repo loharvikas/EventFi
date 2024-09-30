@@ -2,10 +2,14 @@ import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './modules/user/slice';
 import eventReducer from './modules/event/slice';
+import guestReducer from './modules/guest/slice';
+import commonReducer from './modules/common/slice';
 
 const rootReducer = combineReducers({
   userState: userReducer,
   eventState: eventReducer,
+  guestState: guestReducer,
+  commonState: commonReducer,
 });
 
 const store = configureStore({

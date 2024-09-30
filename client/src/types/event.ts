@@ -1,3 +1,5 @@
+import { Guest } from "./guest";
+
 export interface Event {
     id: number;
     eventName: string;
@@ -11,3 +13,14 @@ export interface Event {
     guestCount: number;
     contributors?: string[];
   }
+
+export interface CreateEventPayload {
+    name: string;
+    date: string;
+    address: string;
+    address_line2?: string;
+    city: string;
+    state: string;
+    zip_code: string;
+    country: string;
+}

@@ -12,9 +12,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { registerUser } from '../../store/modules/user/slice';
+import { showAlert } from '../../store/modules/common/slice';
 
 
-export default function Singup(props: { disableCustomTheme?: boolean }) {
+export default function Singup() {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
@@ -35,6 +36,11 @@ export default function Singup(props: { disableCustomTheme?: boolean }) {
       phone_number: data.get('number') as string,
     })).unwrap();
     if (response) {
+      dispatch(showAlert({
+        message: 'User registered successfully, Please login',
+        type: 'success',
+
+      }))
       navigate('/signin');
       return;
     }

@@ -1,5 +1,5 @@
 import { LoadingButton, LoadingButtonProps } from '@mui/lab';
-import { alpha, styled, Typography } from '@mui/material';
+import { alpha, CircularProgress, styled, Typography } from '@mui/material';
 
 
 interface EventFiCardProps extends LoadingButtonProps {
@@ -60,7 +60,12 @@ const  EventFiButton = (props: EventFiCardProps) => {
           color: styles.color,
           border: styles.border,
           margin:'0.5rem 0',
+          '&. MuiLoadingButton-loading':{
+            color:'pink'
+          },
+          
           ...styles
+
         };
       });
 
@@ -69,8 +74,10 @@ const  EventFiButton = (props: EventFiCardProps) => {
         <StyledButton 
             {...props}
             disableRipple
+            loadingPosition='start'
+            variant={props.variant === 'contained' ? props.loading ? 'outlined' : 'contained' : 'contained'}
         >
-            <Typography variant="body1" fontWeight={'600'}>
+            <Typography variant="body2" fontWeight={'600'}>
             {props.label}</Typography>
         </StyledButton>
     )

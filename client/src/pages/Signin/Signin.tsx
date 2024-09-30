@@ -12,13 +12,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { loginUser } from '../../store/modules/user/slice';
+import { useState } from 'react';
 
 
 export default function Signin(props: { disableCustomTheme?: boolean }) {
-  const [emailError, setEmailError] = React.useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
-  const [passwordError, setPasswordError] = React.useState(false);
-  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
+  const [emailError, setEmailError] = useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
         password: data.get('password') as string,
       }
     ))
-    navigate('/')
+    navigate('/events')
   };
 
   const validateInputs = () => {
@@ -132,7 +133,7 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
             <EventFiButton
               type="submit"
               fullWidth
-              variant="outlined"
+              variant="contained"
               onClick={validateInputs}
               label='Sign in'
               

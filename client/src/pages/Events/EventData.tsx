@@ -10,16 +10,22 @@ import { useEffect } from "react";
 import { AppDispatch } from "../../store";
 import { useAppDispatch } from "../../utils/hooks";
 import { getEvents } from "../../store/modules/event/slice";
+import { requestState } from "../../utils/enums";
+import { format } from "date-fns";
 
 
 const EventData = () => {
     const events = useSelector(selectEvents);
     const dispatch = useAppDispatch();
     useEffect(() => {
-      dispatch(getEvents());
+      if (events.status === requestState.idle) {
+        dispatch(getEvents());
+      }
     }, [])
+
+
     const columns: GridColDef[] = [
-        { field: 'eventName', headerName: 'Event Name', width: 200, renderCell: (params:GridRenderCellParams) => {
+        { field: 'name', headerName: 'Event Name', width: 200, renderCell: (params:GridRenderCellParams) => {
             return (<Link to={`/events/${params.id}`}>{params.value}</Link>)
         } },
         {
@@ -27,9 +33,9 @@ const EventData = () => {
           headerName: 'Contributors',
           width: 200,
           renderCell: (params: GridRenderCellParams) => {
-            const contributors = params.value || []; // Ensure it's an array
+            const contributors = ['Alice','David',  'Emma', 'Bob', 'Catherine', 'David', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack']
             return (
-              <Stack direction="row" spacing={-1}  mt={1}>
+              <Stack direction="row" spacing={-1}  mt={1.5}>
                 {contributors.slice(0, 3).map((name:string, index:number) => (
                   <EventFiAvatar
                     key={index}
@@ -44,13 +50,17 @@ const EventData = () => {
             );
           },
         },
-        { field: 'eventDate', headerName: 'Event Date', width: 130 },
-        { field: 'addressLine1', headerName: 'Address Line 1', flex:2, },
-        { field: 'addressLine2', headerName: 'Address Line 2', width: 200 },
+        { field: 'date', headerName: 'Event Date', width: 130,  
+          renderCell: (params) => {
+          const formattedDate = format(new Date(params.value), 'dd EEEE yyyy');
+          return <span>{formattedDate}</span>;
+        },},
+        { field: 'address', headerName: 'Address Line 1', width:250, },
+        { field: 'address_line2', headerName: 'Address Line 2', width: 200, resizable: true },
         { field: 'city', headerName: 'City', width: 130, 
           renderCell: (params: GridRenderCellParams) => {
           return (
-            <Stack direction={'row'} mt={1}>
+            <Stack direction={'row'} mt={1.5}>
  <Stack 
                 direction={'row'}
                 alignItems={'center'}
@@ -63,9 +73,8 @@ const EventData = () => {
            )
         } },
         { field: 'state', headerName: 'State', width: 130 },
-        { field: 'zipCode', headerName: 'Zip Code', width: 100 },
+        { field: 'zip_code', headerName: 'Zip Code', width: 100 },
         { field: 'country', headerName: 'Country', width: 130 },
-        { field: 'guestCount', headerName: 'Guest Count', type: 'number', width: 110 },
     ];
     const generateRandomDate = (start: Date, end: Date): string => {
       return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toISOString().split('T')[0];

@@ -7,3 +7,15 @@ export const selectEvents = createSelector(
   [selectEventState],
   (eventState) => eventState.events
 );
+
+export const selectTopEventContributors = createSelector(
+  [selectEventState],
+  (eventState) => eventState.topContributors
+);
+
+
+export const selectEventContributions = createSelector(
+  [selectEventState],
+  (eventState) => eventState.contributions
+);
+

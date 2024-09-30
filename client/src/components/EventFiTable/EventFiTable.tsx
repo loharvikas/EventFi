@@ -35,7 +35,7 @@ const EventFiTable = (props:EventFiTableProps) => {
         }));
     return (
         <Box sx={{
-            height: props.tableHeight || '70vh',
+            height: props.tableHeight || 'calc(100vh - 150px)',
             maxWidth:'90vw',
             overflow: '',
         }}>
@@ -44,8 +44,7 @@ const EventFiTable = (props:EventFiTableProps) => {
                 columns={props.columns}
                 columnHeaderHeight={40} 
                 disableColumnResize
-                hideFooterPagination
-                hideFooter
+
             />
         </Box>
     );

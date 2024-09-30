@@ -13,13 +13,32 @@ import { Link } from 'react-router-dom';
 import EventFiCard from '../../components/EventFiCard/EventFiCard';
 import EventFiTextField from '../../components/EventFiTextField/EventFiTextField';
 import EventFiButton from '../../components/EventFiButton/EventFiButton';
+import { useAppDispatch } from '../../utils/hooks';
+import { createEvent } from '../../store/modules/event/slice';
 
 
-const EventCreationForm = () => {
+interface EventCreationFormProps {
+  onClose: () => void;
+}
 
-  const handleSubmit = (event: React.FormEvent) => {
+const EventCreationForm = (props: EventCreationFormProps) => {
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (event:  React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Event creation logic goes here
+    const data = new FormData(event.currentTarget);
+    const eventData = {
+      name: data.get('eventName') as string,
+      date: data.get('eventDate') as string,
+      address: data.get('addressLine1') as string,
+      address_line2: data.get('addressLine2') as string,
+      city: data.get('city') as string,
+      state: data.get('state') as string,
+      zip_code: data.get('zipCode') as string,
+      country: data.get('country') as string,
+    }
+    await dispatch(createEvent(eventData));
+    props.onClose();
   };
 
   return (
@@ -131,7 +150,7 @@ const EventCreationForm = () => {
           </FormControl>
         </Grid>
         <Grid item xs={12}>
-          <EventFiButton type="submit" fullWidth variant="contained" label='Create event' loading={true} loadingPosition='start'/>
+          <EventFiButton type="submit" fullWidth variant="contained" label='Create event' loading={false} loadingPosition='start'/>
         </Grid>
       </Grid>
     </Box>

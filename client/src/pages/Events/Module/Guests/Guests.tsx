@@ -10,12 +10,14 @@ const Guests = () => {
     const [openGuestForm, setOpenGuestForm] = useState<boolean>(false);
     return (
         <>
-            <Stack width={100} mb={1}>
-                <EventFiButton label="Add Guest" onClick={() => setOpenGuestForm(true)} />
+            <Stack width={'100%'} mb={1} direction="row-reverse" >
+                <EventFiButton label="Invite guest" onClick={() => setOpenGuestForm(true)} />
             </Stack>
             <GuestsData />
             <EventFiModal open={openGuestForm} onClose={() => setOpenGuestForm(false)}>
-                <GuestCreationForm />
+                <GuestCreationForm 
+                    onClose={() => setOpenGuestForm(false)}
+                />
             </EventFiModal>
         </>
     );

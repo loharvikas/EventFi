@@ -168,7 +168,7 @@ const designSystem: ThemeOptions = {
       disabled: gray[100],
     },
     action: {
-      hover: 'rgba(0, 0, 0, 0.08)',
+      hover: 'rgba(0, 0, 0, 0.04)',
       selected: 'rgba(0, 0, 0, 0.12)',
       selectedOpacity: 0.08,
 

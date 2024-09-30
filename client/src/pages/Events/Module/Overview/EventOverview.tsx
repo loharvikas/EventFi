@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Grid, Stack, Typography } from "@mui/material";
 import { Pen } from "lucide-react";
 import EventFiDashboardCard from "../../../../components/EventFiCard/EventFiDashboardCard";
-import EventFiContributation from "./EventFiContributation";
+import EventContributation from "./EventContributation";
 import EventFiModal from "../../../../components/EventFiModal/EventFiModal";
 import CreateEvent from "../../CreateEvent";
 import EventContributors from "./EventContributors";
+import EventDashboardInfoCard from './EventDashboardCards';
 
 const EventOverview: React.FC = () => {
     const [openEventForm, setOpenEventForm] = useState<boolean>(false);
@@ -19,38 +20,13 @@ const EventOverview: React.FC = () => {
         zipCode: 10001,
         country: 'USA',
     };
-    const contributors = [
-        { name: 'John Doe', email: 'johndoe@gmail.com', contribution: 1000 },
-        { name: 'Jane Doe', email: 'janedoe@gmail.com', contribution: 2000 },
-        { name: 'Bob Smith', email: 'bobsmith@gmail.com', contribution: 3000 },
-        { name: 'Bob Smith', email: 'bobsmith@gmail.com', contribution: 3000 },
-        { name: 'Bob Smith', email: 'bobsmith@gmail.com', contribution: 3000 },
-        { name: 'Bob Smith', email: 'bobsmith@gmail.com', contribution: 3000 },
-
-        { name: 'Bob Smith', email: 'bobsmith@gmail.com', contribution: 3000 },
-        { name: 'Bob Smith', email: 'bobsmith@gmail.com', contribution: 3000 },
-
-        { name: 'Bob Smith', email: 'bobsmith@gmail.com', contribution: 3000 },
-        { name: 'Bob Smith', email: 'bobsmith@gmail.com', contribution: 3000 },
-        { name: 'Bob Smith', email: 'bobsmith@gmail.com', contribution: 3000 },
-        // ... (other contributors)
-    ];
 
     return (
         <Grid container spacing={2}>
             {/* Top Cards */}
             <Grid item xs={12}>
                 <Grid container spacing={2}>
-                    {['Top Guests', 'Total Revenue', 'Average Donation', 'Donation Goal'].map((title, index) => (
-                        <Grid item xs={12} sm={6} md={3} key={index}>
-                            <EventFiDashboardCard>
-                                <Stack direction="column" alignItems="center" spacing={1} height="100px">
-                                    <Typography variant="h6">{title}</Typography>
-                                    <Typography variant="h4" color="green">450k</Typography>
-                                </Stack>
-                            </EventFiDashboardCard>
-                        </Grid>
-                    ))}
+                    <EventDashboardInfoCard />
                 </Grid>
             </Grid>
 
@@ -80,12 +56,12 @@ const EventOverview: React.FC = () => {
 
             {/* Contribution */}
             <Grid item xs={12} md={6} lg={4}>
-                <EventFiContributation />
+                <EventContributation />
             </Grid>
 
             {/* Contributors */}
             <Grid item xs={12} lg={4}>
-                <EventContributors contributors={contributors} />
+                <EventContributors  />
             </Grid>
 
             {/* Modal */}
@@ -93,7 +69,9 @@ const EventOverview: React.FC = () => {
                 open={openEventForm}
                 onClose={() => setOpenEventForm(false)}
             >
-                <CreateEvent />
+                <CreateEvent 
+                    onClose={() => setOpenEventForm(false)}
+                />
             </EventFiModal>
         </Grid>
     );

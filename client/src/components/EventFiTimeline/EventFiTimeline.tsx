@@ -7,7 +7,7 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import { Stack, Typography } from '@mui/material';
 
 
-interface TimelineItemData {
+export interface TimelineItemData {
     title: string;
     subcontent: string;
     time: string;
@@ -26,13 +26,15 @@ const EventFiTimeline = ({items}: GlobalTimelineProps) => {
         [`& .MuiTimelineItem-root:before`]: {
           flex: 0,
           padding: 0,
-          marginLeft:'-0.7rem'
+          marginLeft:'-0.7rem',
+        
         },
+        margin:0,
       }}>
         {items.map((item, index) => (
           <TimelineItem key={index}>
             <TimelineSeparator>
-              <TimelineDot sx={{ bgcolor: 'primary.main', width: 8, height: 8 }} />
+              <TimelineDot sx={{ bgcolor: 'theme.palette.grey[500]', width: 8, height: 8 }} />
               {index !== items.length - 1 && <TimelineConnector sx={{
                 bgcolor:'grey.200',
               }}/>}

@@ -11,7 +11,7 @@ const Sidebar: React.FC<SidebarProps> = ({ items }) => {
   return (
     <Box
       sx={{
-        width: 250,
+        width: 200,
         backgroundColor: 'background.paper',
         height: '100vh',
         display: 'flex',
@@ -30,11 +30,20 @@ const Sidebar: React.FC<SidebarProps> = ({ items }) => {
               className={({ isActive, isPending }) =>
                   isPending ? "nav-link-pending" : isActive ? "nav-link-active" : "nav-link"
               }
-              
             >
-              <ListItem >
-                <ListItemText primary={item.text} />
-              </ListItem>
+              {({ isActive }) => (
+                <ListItem sx={{
+                  mb:1.5,
+                  ...(isActive && {
+                    backgroundColor: 'action.hover',
+                })
+                }}>
+                    {item.icon}
+                    <ListItemText primary={item.text} sx={{
+                      ml:1.5,
+                    }}/>
+                </ListItem>
+              )}
             </NavLink>
         ))}
       </List>

@@ -10,6 +10,9 @@ import RecentEvents from "./RecentEvents";
 
 const Events = () => {
     const [openEventForm, setOpenEventForm] = useState<boolean>(false);
+
+
+    
     return (
         <Box >
             <Stack direction="row" justifyContent="space-between" alignItems="center" borderBottom={1} borderColor="divider" paddingTop={0.5} paddingBottom={0.5} >
@@ -17,11 +20,13 @@ const Events = () => {
                     <Typography variant="h6" >Events</Typography>
                 </Stack>
                 <Stack width={'150px'}>
-                    <EventFiButton label="Create Event"   onClick={() => setOpenEventForm(true)} />
+                    <EventFiButton label="Create event"   onClick={() => setOpenEventForm(true)} />
                 </Stack>
             </Stack>
             <EventFiModal open={openEventForm} onClose={() => setOpenEventForm(false)}>
-                <EventCreationForm />
+                <EventCreationForm
+                    onClose={() => setOpenEventForm(false)}
+                />
             </EventFiModal>
             <Stack>
                 <EventData />
