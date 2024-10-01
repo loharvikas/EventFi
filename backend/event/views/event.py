@@ -9,8 +9,8 @@ from event.serializers.event import EventCreateSerializer, EventStatSerializer, 
 class EventCreateView(APIView):
 
     def get(self, request, *args, **kwargs):
-
-        events = EventService.get_all()
+        user = request.user
+        events = EventService.get_all(user)
         serializer = EventRetrieveSerializer(events, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

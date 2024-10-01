@@ -1,7 +1,7 @@
 import { CreateEventPayload, UpdateEventPayload } from '../types/event';
 import { axiosInstance } from './axios';
 
-const getEvents = () => axiosInstance.get('events/', {});
+const getEvents = () => axiosInstance.get('events/', { headers: { JWT: 'true' } });
 
 const createEvent = (event: CreateEventPayload) =>
     axiosInstance.post('events/', event, { headers: { JWT: 'true' } });

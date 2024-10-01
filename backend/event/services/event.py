@@ -79,9 +79,11 @@ class EventService:
         Event.objects.get(id=id).delete()
 
     @staticmethod
-    def get_all() -> List[Event]:
+    def get_all(user: User) -> List[Event]:
         """Returns a list of all events."""
-        return list(Event.objects.all())
+        events = Event.objects.filter(created_by=user)
+        return events
+        
 
 
     @staticmethod
