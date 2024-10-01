@@ -6,20 +6,20 @@ import guestReducer from './modules/guest/slice';
 import commonReducer from './modules/common/slice';
 
 const rootReducer = combineReducers({
-  userState: userReducer,
-  eventState: eventReducer,
-  guestState: guestReducer,
-  commonState: commonReducer,
+    userState: userReducer,
+    eventState: eventReducer,
+    guestState: guestReducer,
+    commonState: commonReducer,
 });
 
 const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+        }),
 
-  devTools: true,
+    devTools: true,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

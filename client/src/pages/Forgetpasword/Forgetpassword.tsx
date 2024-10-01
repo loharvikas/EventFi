@@ -8,52 +8,56 @@ import EventFiCard from '../../components/EventFiCard/EventFiCard';
 import EventFiTextField from '../../components/EventFiTextField/EventFiTextField';
 import EventFiButton from '../../components/EventFiButton/EventFiButton';
 import { BrandIcon } from '../../assets/icons/BrandLogo';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { registerUser } from '../../store/modules/user/slice';
+import { useState } from 'react';
+import { useAppDispatch } from '../../utils/hooks';
+import { forgetPassword } from '../../store/modules/user/slice';
 import { showAlert } from '../../store/modules/common/slice';
+import { useNavigate } from 'react-router-dom';
 
-export default function Singup() {
-    const [emailError, setEmailError] = React.useState(false);
-    const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
-    const [passwordError, setPasswordError] = React.useState(false);
-    const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-    const [numberError, setNumberError] = React.useState(false);
-    const [numberErrorMessage, setNumberErrorMessage] = React.useState('');
+const ForgotPassword = () => {
+    const [emailError, setEmailError] = useState<boolean>(false);
+    const [emailErrorMessage, setEmailErrorMessage] = useState<string>('');
+    const [passwordError, setPasswordError] = useState<boolean>(false);
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string>('');
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        const response = await dispatch(
-            registerUser({
-                email: data.get('email') as string,
-                password: data.get('password') as string,
-                phone_number: data.get('number') as string,
-            })
-        ).unwrap();
-        if (response) {
-            dispatch(
-                showAlert({
-                    message: 'User registered successfully, Please login',
-                    type: 'success',
+        if (!validateInputs()) return;
+
+        try {
+            await dispatch(
+                forgetPassword({
+                    email: data.get('email') as string,
+                    password: data.get('newPassword') as string,
                 })
-            );
+            ).unwrap();
+    
+            dispatch(showAlert({
+                message: 'Password has been reset successfully. Please login',
+                type: 'success',
+            }));
+    
             navigate('/signin');
-            return;
+        } catch (error: any) {
+            console.log('---ERROR--', error)
+            dispatch(showAlert({
+                message: error || 'Failed to reset password. Please try again.',
+                type: 'failure',
+            }));
         }
     };
 
     const validateInputs = () => {
         const email = document.getElementById('email') as HTMLInputElement;
-        const password = document.getElementById(
-            'password'
+        const newPassword = document.getElementById(
+            'newPassword'
         ) as HTMLInputElement;
-        const number = document.getElementById('number') as HTMLInputElement;
 
         let isValid = true;
 
@@ -66,7 +70,7 @@ export default function Singup() {
             setEmailErrorMessage('');
         }
 
-        if (!password.value || password.value.length < 6) {
+        if (!newPassword.value || newPassword.value.length < 6) {
             setPasswordError(true);
             setPasswordErrorMessage(
                 'Password must be at least 6 characters long.'
@@ -76,16 +80,6 @@ export default function Singup() {
             setPasswordError(false);
             setPasswordErrorMessage('');
         }
-        if (!number.value || number.value.length < 10) {
-            setNumberError(true);
-            setNumberErrorMessage(
-                'Phone number must be at least 10 characters long.'
-            );
-            isValid = false;
-        } else {
-            setNumberError(false);
-            setNumberErrorMessage('');
-        }
 
         return isValid;
     };
@@ -94,7 +88,7 @@ export default function Singup() {
         <Stack direction="column" justifyContent="space-between" mt="20vh">
             <EventFiCard variant="outlined">
                 <BrandIcon />
-                <Typography variant="h3">Register</Typography>
+                <Typography variant="h3">Reset Password</Typography>
                 <Box
                     component="form"
                     onSubmit={handleSubmit}
@@ -121,43 +115,18 @@ export default function Singup() {
                             fullWidth
                             variant="outlined"
                             color={emailError ? 'error' : 'primary'}
-                            sx={{ ariaLabel: 'email' }}
                         />
                     </FormControl>
                     <FormControl>
-                        <FormLabel htmlFor="number">Phone Number</FormLabel>
-                        <EventFiTextField
-                            id="number"
-                            type="number"
-                            name="number"
-                            placeholder="8980800000"
-                            autoFocus
-                            required
-                            fullWidth
-                            variant="outlined"
-                            color={numberError ? 'error' : 'primary'}
-                            helperText={numberErrorMessage}
-                            error={numberError}
-                            sx={{ ariaLabel: 'number' }}
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                            }}
-                        >
-                            <FormLabel htmlFor="password">Password</FormLabel>
-                        </Box>
+                        <FormLabel htmlFor="newPassword">New Password</FormLabel>
                         <EventFiTextField
                             error={passwordError}
                             helperText={passwordErrorMessage}
-                            name="password"
+                            name="newPassword"
                             placeholder="••••••"
                             type="password"
-                            id="password"
-                            autoComplete="current-password"
+                            id="newPassword"
+                            autoComplete="new-password"
                             autoFocus
                             required
                             fullWidth
@@ -165,24 +134,18 @@ export default function Singup() {
                             color={passwordError ? 'error' : 'primary'}
                         />
                     </FormControl>
-
-                    {/* <ForgotPassword open={open} handleClose={handleClose} /> */}
                     <EventFiButton
                         type="submit"
                         fullWidth
                         variant="contained"
                         onClick={validateInputs}
-                        label="Sign up"
+                        label="Reset Password"
                     />
-
-                    <Typography sx={{ textAlign: 'center' }}>
-                        Already registered?{' '}
-                        <span color="primary.main">
-                            <Link to={'/'}>Sign in</Link>
-                        </span>
-                    </Typography>
                 </Box>
             </EventFiCard>
         </Stack>
     );
 }
+
+
+export default ForgotPassword

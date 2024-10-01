@@ -1,6 +1,10 @@
-from user.exceptions.user import ExceptionUserAlreadyExists
+from user.exceptions.user import ExceptionUserAlreadyExists, ExceptionUserDoesNotExist
 from user.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.db.models import QuerySet
+from guest.models import Contribution
+
+from guest.services.guest import ContributionService
 
 class UserService:
     '''
@@ -28,3 +32,16 @@ class UserService:
                 "access_token": str(token.access_token),
         }
         return res
+
+    @classmethod
+    def forget_password(cls, email:str, password:str) -> None:
+        if not User.objects.filter(email=email).exists():
+            raise ExceptionUserDoesNotExist
+        user = User.objects.get(email=email)
+        user.set_password(password)
+        user.save()
+
+    @classmethod
+    def get_contributions(cls, email:str) -> QuerySet[Contribution]:
+        contributions = ContributionService.get_contribution_by_email(email)
+        return contributions

@@ -1,4 +1,3 @@
-
 export interface Guest {
     id: number;
     name: string;
@@ -20,8 +19,8 @@ export interface AddContributionPayload {
 export interface Contribution {
     id: number;
     guest: Guest;
-    event:Event;
+    event: Event;
     amount: number;
-    data:string;
+    data: string;
     created_on: string;
 }

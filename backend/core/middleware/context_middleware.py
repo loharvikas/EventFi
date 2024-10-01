@@ -19,7 +19,6 @@ class ContextMiddleware:
         if JWT_TOKEN:
             JWT_TOKEN = JWT_TOKEN[7:]  # Remove the "Bearer " prefix
             decoded_token = jwt.decode(JWT_TOKEN, settings.SECRET_KEY, algorithms=['HS256'])
-            print('---DECODED--', decoded_token)
             
         
         response = self.get_response(request)

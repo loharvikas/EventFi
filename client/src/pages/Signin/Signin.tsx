@@ -14,143 +14,137 @@ import { AppDispatch } from '../../store';
 import { loginUser } from '../../store/modules/user/slice';
 import { useState } from 'react';
 
-
 export default function Signin(props: { disableCustomTheme?: boolean }) {
-  const [emailError, setEmailError] = useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = useState('');
-  const [passwordError, setPasswordError] = useState(false);
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
-
-  const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
+    const [emailError, setEmailError] = useState(false);
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [passwordError, setPasswordError] = useState(false);
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
 
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    await dispatch(loginUser(
-      {
-        email: data.get('email') as string,
-        password: data.get('password') as string,
-      }
-    ))
-    navigate('/events')
-  };
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
-  const validateInputs = () => {
-    const email = document.getElementById('email') as HTMLInputElement;
-    const password = document.getElementById('password') as HTMLInputElement;
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        await dispatch(
+            loginUser({
+                email: data.get('email') as string,
+                password: data.get('password') as string,
+            })
+        );
+        navigate('/events');
+    };
 
-    let isValid = true;
+    const validateInputs = () => {
+        const email = document.getElementById('email') as HTMLInputElement;
+        const password = document.getElementById(
+            'password'
+        ) as HTMLInputElement;
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
-      isValid = false;
-    } else {
-      setEmailError(false);
-      setEmailErrorMessage('');
-    }
+        let isValid = true;
 
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
-      isValid = false;
-    } else {
-      setPasswordError(false);
-      setPasswordErrorMessage('');
-    }
+        if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+            setEmailError(true);
+            setEmailErrorMessage('Please enter a valid email address.');
+            isValid = false;
+        } else {
+            setEmailError(false);
+            setEmailErrorMessage('');
+        }
 
-    return isValid;
-  };
+        if (!password.value || password.value.length < 6) {
+            setPasswordError(true);
+            setPasswordErrorMessage(
+                'Password must be at least 6 characters long.'
+            );
+            isValid = false;
+        } else {
+            setPasswordError(false);
+            setPasswordErrorMessage('');
+        }
 
-  return (
-      <Stack direction="column" justifyContent="space-between" mt='20vh'>
+        return isValid;
+    };
 
-        <EventFiCard variant="outlined">
-          <BrandIcon />
-          <Typography
-            variant="h3"
-          >
-            Sign in
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              gap: 2,
-            }}
-          >
-            <FormControl>
-              <FormLabel htmlFor="email" >Email</FormLabel>
-              <EventFiTextField
-                error={emailError}
-                helperText={emailErrorMessage}
-                id="email"
-                type="email"
-                name="email"
-                placeholder="your@email.com"
-                autoComplete="email"
-                autoFocus
-                required
-                fullWidth
-                variant="outlined"
-                color={emailError ? 'error' : 'primary'}
-                sx={{ ariaLabel: 'email' }}
-              />
-            </FormControl>
-            <FormControl>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <a
-                  href='/'
-                  onClick={() => console.log('')}
+    return (
+        <Stack direction="column" justifyContent="space-between" mt="20vh">
+            <EventFiCard variant="outlined">
+                <BrandIcon />
+                <Typography variant="h3">Sign in</Typography>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    noValidate
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '100%',
+                        gap: 2,
+                    }}
                 >
-                  Forgot your password?
-                </a>
-              </Box>
-              <EventFiTextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
-                name="password"
-                placeholder="••••••"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                autoFocus
-                required
-                fullWidth
-                variant="outlined"
-                color={passwordError ? 'error' : 'primary'}
-              />
-            </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <EventFiTextField
+                            error={emailError}
+                            helperText={emailErrorMessage}
+                            id="email"
+                            type="email"
+                            name="email"
+                            placeholder="your@email.com"
+                            autoComplete="email"
+                            autoFocus
+                            required
+                            fullWidth
+                            variant="outlined"
+                            color={emailError ? 'error' : 'primary'}
+                            sx={{ ariaLabel: 'email' }}
+                        />
+                    </FormControl>
+                    <FormControl>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                            }}
+                        >
+                            <FormLabel htmlFor="password">Password</FormLabel>
+                            <a  onClick={() => navigate('/forgotpassword')}>
+                                Forgot your password?
+                            </a>
+                        </Box>
+                        <EventFiTextField
+                            error={passwordError}
+                            helperText={passwordErrorMessage}
+                            name="password"
+                            placeholder="••••••"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            autoFocus
+                            required
+                            fullWidth
+                            variant="outlined"
+                            color={passwordError ? 'error' : 'primary'}
+                        />
+                    </FormControl>
 
-            {/* <ForgotPassword open={open} handleClose={handleClose} /> */}
-            <EventFiButton
-              type="submit"
-              fullWidth
-              variant="contained"
-              onClick={validateInputs}
-              label='Sign in'
-              
-            />
-             
-            <Typography sx={{ textAlign: 'center',  }}>
-              Don&apos;t have an account?{' '}
-              <span >
-                <Link
-                  to='/signup'
-                >
-                  Register
-                </Link>
-              </span>
-            </Typography>
-          </Box>
-        </EventFiCard>
-      </Stack>
-  );
+                    <EventFiButton
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        onClick={validateInputs}
+                        label="Sign in"
+                    />
+
+                    <Typography sx={{ textAlign: 'center' }}>
+                        Don&apos;t have an account?{' '}
+                        <span>
+                            <Link to="/signup">Register</Link>
+                        </span>
+                    </Typography>
+                </Box>
+            </EventFiCard>
+        </Stack>
+    );
 }

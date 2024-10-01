@@ -1,18 +1,16 @@
-import { Guest } from "./guest";
+import { Guest } from './guest';
 
 export interface Event {
-    id: number;
-    eventName: string;
-    eventDate: string;
-    addressLine1: string;
-    addressLine2: string;
+    id: string;
+    name: string;
+    date: string;
+    address: string;
+    address_line2?: string;
     city: string;
     state: string;
-    zipCode: number;
+    zip_code: string;
     country: string;
-    guestCount: number;
-    contributors?: string[];
-  }
+}
 
 export interface CreateEventPayload {
     name: string;
@@ -23,4 +21,16 @@ export interface CreateEventPayload {
     state: string;
     zip_code: string;
     country: string;
+}
+
+export interface UpdateEventPayload {
+    name?: string;
+    date?: string;
+    address?: string;
+    address_line2?: string;
+    city?: string;
+    state?: string;
+    zip_code?: string;
+    country?: string;
+    id?: string;
 }

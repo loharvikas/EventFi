@@ -4,17 +4,16 @@ import { RootState } from '../..';
 const selectGuestState = (state: RootState) => state.guestState;
 
 export const selectGuests = createSelector(
-  [selectGuestState],
-  (guestState) => guestState.guests
+    [selectGuestState],
+    (guestState) => guestState.guests
 );
 
 export const selectAddContribution = createSelector(
-  [selectGuestState],
-  (guestState) => guestState.addContribution
+    [selectGuestState],
+    (guestState) => guestState.addContribution
 );
 
 export const selectCreateGuest = createSelector(
-  [selectGuestState],
-  (guestState) => guestState.createGuest
-  
+    [selectGuestState],
+    (guestState) => guestState.createGuest
 );

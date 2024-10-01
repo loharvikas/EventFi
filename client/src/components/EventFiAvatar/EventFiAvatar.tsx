@@ -5,7 +5,10 @@ interface EventFiAvatarProps extends AvatarProps {
     initials?: string;
 }
 
-const EventFiAvatar: React.FC<EventFiAvatarProps> = ({ initials, ...props }) => {
+const EventFiAvatar: React.FC<EventFiAvatarProps> = ({
+    initials,
+    ...props
+}) => {
     const { backgroundColor, textColor } = useMemo(() => {
         if (!initials) {
             return { backgroundColor: '#95A4FC', textColor: '#333333' };
@@ -26,11 +29,17 @@ const EventFiAvatar: React.FC<EventFiAvatarProps> = ({ initials, ...props }) => 
 
         const selectedScheme = colorSchemes[hash % colorSchemes.length];
         const hue = (selectedScheme.hue + (hash % 20) - 10) % 360; // Slight hue variation
-        const saturation = Math.max(75, Math.min(95, selectedScheme.saturation + (hash % 10) - 5));
-        const lightness = Math.max(75, Math.min(85, selectedScheme.lightness + (hash % 10) - 5));
+        const saturation = Math.max(
+            75,
+            Math.min(95, selectedScheme.saturation + (hash % 10) - 5)
+        );
+        const lightness = Math.max(
+            75,
+            Math.min(85, selectedScheme.lightness + (hash % 10) - 5)
+        );
 
         const backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-        
+
         // Use dark text for all backgrounds as they're light
         const textColor = '#fff';
 
@@ -47,14 +56,18 @@ const EventFiAvatar: React.FC<EventFiAvatarProps> = ({ initials, ...props }) => 
     };
 
     return (
-        <Avatar {...props} style={{ ...props.style, ...gradientStyle }} sx={{
-            height: 25,
-            width: 25,
-            padding: 0,
-            margin: 0,
-            fontSize: '0.7rem',
-        }}>
-           {initials}
+        <Avatar
+            {...props}
+            style={{ ...props.style, ...gradientStyle }}
+            sx={{
+                height: 25,
+                width: 25,
+                padding: 0,
+                margin: 0,
+                fontSize: '0.7rem',
+            }}
+        >
+            {initials}
         </Avatar>
     );
 };

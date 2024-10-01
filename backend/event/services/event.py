@@ -41,10 +41,10 @@ class EventService:
     @staticmethod
     def update(
         id:str,
-        event: Event,
         name: Optional[str] = None,
         date: Optional[str] = None,
         address: Optional[str] = None,
+        address_line2: Optional[str] = None,
         city: Optional[str] = None,
         state: Optional[str] = None,
         zip_code: Optional[str] = None,
@@ -58,6 +58,8 @@ class EventService:
             event.date = date
         if address:
             event.address = address
+        if address_line2:
+            event.address_line2 = address_line2
         if city:
             event.city = city
         if state:

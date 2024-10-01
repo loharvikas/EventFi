@@ -6,6 +6,10 @@ class RegisterSerializer(serializers.Serializer):
     phone_number = serializers.CharField(max_length=10, required=False)
     password = serializers.CharField(max_length=128, )
 
+class ForgetPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(max_length=128, required=True)
+
 
 class UserSerializer(serializers.Serializer):
     email = serializers.EmailField(read_only=True)

@@ -1,4 +1,3 @@
-
 export interface User {
     id: number;
     email: string;
@@ -22,9 +21,12 @@ export interface UserLoginPayload {
     password: string;
 }
 
-
 export interface UserLoginRespone {
     access: string;
     refresh: string;
 }
 
+export interface PasswordForgetPayload {
+    email: string;
+    password: string;
+}

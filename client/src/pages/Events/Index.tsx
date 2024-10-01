@@ -1,38 +1,48 @@
-import { Box, Modal, Stack, Typography } from "@mui/material";
-import EventFiButton from "../../components/EventFiButton/EventFiButton";
-import EventCreationForm from "./CreateEvent";
-import { useState } from "react";
-import EventFiModal from "../../components/EventFiModal/EventFiModal";
-import { GridColDef } from "@mui/x-data-grid";
-import EventData from "./EventData";
-import RecentEvents from "./RecentEvents";
-
+import { Box, Drawer, Stack, Typography } from '@mui/material';
+import EventFiButton from '../../components/EventFiButton/EventFiButton';
+import { useState } from 'react';
+import EventData from './EventData';
+import EventCreateUpdateForm from './EventForm';
 
 const Events = () => {
     const [openEventForm, setOpenEventForm] = useState<boolean>(false);
 
-
-    
     return (
-        <Box >
-            <Stack direction="row" justifyContent="space-between" alignItems="center" borderBottom={1} borderColor="divider" paddingTop={0.5} paddingBottom={0.5} >
+        <Box>
+            <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                borderBottom={1}
+                borderColor="divider"
+            >
                 <Stack>
-                    <Typography variant="h6" >Events</Typography>
+                    <Typography variant="h6">Events</Typography>
                 </Stack>
                 <Stack width={'150px'}>
-                    <EventFiButton label="Create event"   onClick={() => setOpenEventForm(true)} />
+                    <EventFiButton
+                        label="Create event"
+                        onClick={() => setOpenEventForm(true)}
+                    />
                 </Stack>
             </Stack>
-            <EventFiModal open={openEventForm} onClose={() => setOpenEventForm(false)}>
-                <EventCreationForm
+            {/* <EventFiModal open={openEventForm} onClose={() => setOpenEventForm(false)}>
+            </EventFiModal> */}
+            <Drawer
+                open={openEventForm}
+                onClose={() => setOpenEventForm(false)}
+                anchor="right"
+            >
+                <EventCreateUpdateForm
                     onClose={() => setOpenEventForm(false)}
+                    eventData={null}
                 />
-            </EventFiModal>
+            </Drawer>
             <Stack>
                 <EventData />
             </Stack>
         </Box>
-    )
-}
+    );
+};
 
 export default Events;

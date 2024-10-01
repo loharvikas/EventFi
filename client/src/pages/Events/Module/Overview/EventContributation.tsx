@@ -1,16 +1,16 @@
-
-import { Typography } from "@mui/material";
-import EventFiDashboardCard from "../../../../components/EventFiCard/EventFiDashboardCard"
-import EventFiTimeline, { TimelineItemData } from "../../../../components/EventFiTimeline/EventFiTimeline"
-import { useSelector } from "react-redux";
-import { selectEventContributions } from "../../../../store/modules/event/selector";
-import { useAppDispatch } from "../../../../utils/hooks";
-import { useEffect, useState } from "react";
-import { getContributions } from "../../../../store/modules/event/slice";
-import { useParams } from "react-router-dom";
-import { requestState } from "../../../../utils/enums";
-import { formatDistance, } from "date-fns";
-
+import { Typography } from '@mui/material';
+import EventFiDashboardCard from '../../../../components/EventFiCard/EventFiDashboardCard';
+import EventFiTimeline, {
+    TimelineItemData,
+} from '../../../../components/EventFiTimeline/EventFiTimeline';
+import { useSelector } from 'react-redux';
+import { selectEventContributions } from '../../../../store/modules/event/selector';
+import { useAppDispatch } from '../../../../utils/hooks';
+import { useEffect, useState } from 'react';
+import { getContributions } from '../../../../store/modules/event/slice';
+import { useParams } from 'react-router-dom';
+import { requestState } from '../../../../utils/enums';
+import { formatDistance } from 'date-fns';
 
 const EventContributation = () => {
     const [data, setData] = useState<TimelineItemData[]>([]);
@@ -19,19 +19,19 @@ const EventContributation = () => {
     const contibutions = useSelector(selectEventContributions);
 
     useEffect(() => {
-       if (contibutions.status === requestState.success) {
-           const items: TimelineItemData[] = [];
-           contibutions.data.forEach((item) => {
-               items.push({
-                   title: item.guest.name,
-                   subcontent: `contrbuted ${item.amount}`,
-                   time: formatDistance(item.created_on, new Date(), { addSuffix: true })
-                   
-               });
-               
-           });
-           setData(items);
-       }
+        if (contibutions.status === requestState.success) {
+            const items: TimelineItemData[] = [];
+            contibutions.data.forEach((item) => {
+                items.push({
+                    title: item.guest.name,
+                    subcontent: `contrbuted ${item.amount}`,
+                    time: formatDistance(item.created_on, new Date(), {
+                        addSuffix: true,
+                    }),
+                });
+            });
+            setData(items);
+        }
     }, [contibutions.status]);
 
     useEffect(() => {
@@ -40,17 +40,21 @@ const EventContributation = () => {
             dispatch(getContributions(event_id));
         }
     }, []);
-    
+
+    console.log('---DATA---', data);
 
     return (
-        <EventFiDashboardCard sx={{
-            overflow:'scroll',
-            height:'400px',
-        }} minWidth="390px">
-            <Typography variant="h5" >Contributions</Typography>
+        <EventFiDashboardCard
+            sx={{
+                overflow: 'scroll',
+                height: '400px',
+            }}
+            minWidth="390px"
+        >
+            <Typography variant="h5">Contributions</Typography>
             <EventFiTimeline items={data} />
         </EventFiDashboardCard>
     );
-}
+};
 
 export default EventContributation;

@@ -1,11 +1,11 @@
 // // @ts-nocheck
 
-// import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'; 
+// import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 // import PrivateRoute from "./PrivateRoute";
 // import Signin from "../pages/Signin/Signin";
 // import Singup from "../pages/Signup/Signup";
 // import path from "path";
-  
+
 // const router = createBrowserRouter(
 //     createRoutesFromElements(
 //       <Route >
@@ -18,9 +18,9 @@
 //       </Route>
 //     )
 //   );
-  
+
 // export default router;
 
 export const newFunc = () => {
-    console.log('--YES--')
-}
+    console.log('--YES--');
+};

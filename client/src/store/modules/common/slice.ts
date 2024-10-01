@@ -6,37 +6,39 @@ interface CommonState {
         message: string;
         type: 'success' | 'info' | 'failure';
         open: boolean;
-    }
+    };
 }
 
 const initialState: CommonState = {
-  alert: {
-    message: '',
-    type: 'success',
-    open: false,
-  },
+    alert: {
+        message: '',
+        type: 'success',
+        open: false,
+    },
 };
 
 const commonSlice = createSlice({
-  name: 'alert',
-  initialState,
-  reducers: {
-    showAlert: (
-      state,
-      action: PayloadAction<{ message: string; type: 'success' | 'info' | 'failure' }>
-    ) => {
-      state.alert.message = action.payload.message;
-      state.alert.type = action.payload.type;
-      state.alert.open = true;
+    name: 'alert',
+    initialState,
+    reducers: {
+        showAlert: (
+            state,
+            action: PayloadAction<{
+                message: string;
+                type: 'success' | 'info' | 'failure';
+            }>
+        ) => {
+            state.alert.message = action.payload.message;
+            state.alert.type = action.payload.type;
+            state.alert.open = true;
+        },
+        closeAlert: (state) => {
+            state.alert.open = false;
+            state.alert.message = '';
+        },
     },
-    closeAlert: (state) => {
-      state.alert.open = false;
-      state.alert.message = ''; 
-    },
-  },
 });
 
 export const { showAlert, closeAlert } = commonSlice.actions;
 
 export default commonSlice.reducer;
-

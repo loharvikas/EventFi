@@ -3,4 +3,4 @@ export enum requestState {
     loading = 'loading',
     success = 'success',
     failed = 'failed',
-  }
+}

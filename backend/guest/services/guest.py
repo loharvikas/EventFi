@@ -56,6 +56,11 @@ class ContributionService:
             event_id=event_id,
             amount=amount
         )
+    
+    @classmethod
+    def get_contribution_by_email(cls, email:str) -> QuerySet[Contribution]:
+        contributions = Contribution.objects.filter(guest__email=email)
+        return contributions
 
     @staticmethod
     def get_contributions_by_guest(guest: Guest) -> QuerySet[Contribution]:

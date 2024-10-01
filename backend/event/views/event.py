@@ -17,7 +17,6 @@ class EventCreateView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = EventCreateSerializer(data=request.data)
         if serializer.is_valid():
-            print('---REQUEST DATA--', request.user)
             event = EventService.create(
                 created_by=request.user,
                 **serializer.validated_data
@@ -30,7 +29,7 @@ class EventCreateView(APIView):
 class EventRetrieveUpdateDeleteView(APIView):
 
     def get(self, request, event_id, *args, **kwargs):
-        event = EventService.get_event_by_id(event_id)
+        event = EventService.get(event_id)
         if not event:
             return Response({"detail": "Event not found"}, status=status.HTTP_404_NOT_FOUND)
         
@@ -50,7 +49,7 @@ class EventRetrieveUpdateDeleteView(APIView):
 
     def delete(self, request, event_id, *args, **kwargs):
         EventService.delete(event_id)
-        return Response({"detail": "Event deleted"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"detail": event_id}, status=status.HTTP_204_NO_CONTENT)
 
 
 
