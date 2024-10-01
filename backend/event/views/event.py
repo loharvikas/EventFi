@@ -55,7 +55,6 @@ class EventRetrieveUpdateDeleteView(APIView):
 class EventStatView(APIView):
     def get(self, request, event_id:str,):
         stat = EventService.get_stat(event_id)
-        print('--RES-', stat)
         serializer = EventStatSerializer(stat)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
