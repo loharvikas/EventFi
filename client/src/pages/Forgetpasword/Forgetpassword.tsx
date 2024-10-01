@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { useAppDispatch } from '../../utils/hooks';
 import { forgetPassword } from '../../store/modules/user/slice';
 import { showAlert } from '../../store/modules/common/slice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
     const [emailError, setEmailError] = useState<boolean>(false);
@@ -149,6 +149,12 @@ const ForgotPassword = () => {
                         label="Reset Password"
                     />
                 </Box>
+                <Typography sx={{ textAlign: 'center' }}>
+                        Don&apos;t have an account?{' '}
+                        <span>
+                            <Link to="/signup">Register</Link>
+                        </span>
+                    </Typography>
             </EventFiCard>
         </Stack>
     );
