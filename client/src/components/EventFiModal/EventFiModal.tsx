@@ -15,7 +15,7 @@ export default function EventFiModal(props: EventFiModalProps) {
                 backdrop: { sx: { backgroundColor: 'rgba(0, 0, 0, 0.09)' } },
             }}
             sx={{
-                border:'none',
+                border: 'none',
                 boxShadow:
                     'lch(0 0 0 / 0.125) 0px 4px 30px, lch(0 0 0 / 0.04) 0px 3px 17px, lch(0 0 0 / 0.04) 0px 2px 8px, lch(0 0 0 / 0.04) 0px 1px 1px',
                 transition: 'all 300ms cubic-bezier(0.43, 0.07, 0.59, 0.94)',

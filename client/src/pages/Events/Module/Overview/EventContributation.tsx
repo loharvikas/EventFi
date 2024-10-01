@@ -41,7 +41,6 @@ const EventContributation = () => {
         }
     }, []);
 
-    console.log('---DATA---', data);
 
     return (
         <EventFiDashboardCard

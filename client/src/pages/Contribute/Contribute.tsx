@@ -22,7 +22,6 @@ const Contribute = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const params = useParams();
-    
 
     useEffect(() => {
         const event_id = params.id;
@@ -44,9 +43,7 @@ const Contribute = () => {
                     'linear-gradient(135deg,#000000 0%,#1a1a2e 50%,#3b185f 100%)',
             }}
         >
-            {
-                data && (
-
+            {data && (
                 <EventFiCard
                     width="450px"
                     boxShadow="0 10px 20px rgba(0,0,0,0.2)"
@@ -66,9 +63,7 @@ const Contribute = () => {
                             <SubtitleTypography variant="subtitle1">
                                 Name
                             </SubtitleTypography>
-                            <Typography variant="body1">
-                                {data.name}
-                            </Typography>
+                            <Typography variant="body1">{data.name}</Typography>
                         </Grid>
                         <Grid item xs={6}>
                             <SubtitleTypography variant="subtitle1">
@@ -96,19 +91,25 @@ const Contribute = () => {
                             <SubtitleTypography variant="subtitle1">
                                 State
                             </SubtitleTypography>
-                            <Typography variant="body1">{data.state}</Typography>
+                            <Typography variant="body1">
+                                {data.state}
+                            </Typography>
                         </Grid>
                         <Grid item xs={6}>
                             <SubtitleTypography variant="subtitle1">
                                 Zip Code
                             </SubtitleTypography>
-                            <Typography variant="body1">{data.zip_code}</Typography>
+                            <Typography variant="body1">
+                                {data.zip_code}
+                            </Typography>
                         </Grid>
                         <Grid item xs={6}>
                             <SubtitleTypography variant="subtitle1">
                                 Country
                             </SubtitleTypography>
-                            <Typography variant="body1">{data.country}</Typography>
+                            <Typography variant="body1">
+                                {data.country}
+                            </Typography>
                         </Grid>
                     </Grid>
                     <Box display="flex" justifyContent="center" mt={4}>
@@ -124,7 +125,11 @@ const Contribute = () => {
                             fullWidth
                         />
                     </Box>
-                    <Box display="flex" alignItems="center" justifyContent="center">
+                    <Box
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
                         <Typography variant="body2" sx={{ mr: 1 }}>
                             Powered by
                         </Typography>
@@ -137,9 +142,7 @@ const Contribute = () => {
                         </Typography>
                     </Box>
                 </EventFiCard>
-                )
-
-            }
+            )}
         </Box>
     );
 };

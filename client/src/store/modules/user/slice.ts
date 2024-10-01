@@ -34,7 +34,7 @@ interface UserState {
         data: Contribution[];
         status: requestState;
         error: string | null;
-    }
+    };
 }
 
 const initialState: UserState = {
@@ -64,7 +64,7 @@ const initialState: UserState = {
 
 export const registerUser = createAsyncThunk(
     'user/registerUser',
-    async (user: UserRegisterPayload, { rejectWithValue } ) => {
+    async (user: UserRegisterPayload, { rejectWithValue }) => {
         try {
             const response = await userApi.registerUser(user);
             return response.data;
@@ -96,7 +96,7 @@ export const forgetPassword = createAsyncThunk(
             throw rejectWithValue(error?.response.data?.detail);
         }
     }
-)
+);
 
 export const getMyContributions = createAsyncThunk(
     'user/getMyContributions',
@@ -166,7 +166,7 @@ const userSlice = createSlice({
             .addCase(getMyContributions.rejected, (state, action) => {
                 state.contributions.status = requestState.failed;
                 state.contributions.error = action.error.message || null;
-            })
+            });
     },
 });
 

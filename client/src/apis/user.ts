@@ -1,4 +1,8 @@
-import { PasswordForgetPayload, UserLoginPayload, UserRegisterPayload } from '../types/user';
+import {
+    PasswordForgetPayload,
+    UserLoginPayload,
+    UserRegisterPayload,
+} from '../types/user';
 import { axiosInstance } from './axios';
 
 const registerUser = (registerUserDetails: UserRegisterPayload) =>
@@ -11,12 +15,11 @@ const forgetPassword = (loginUserDetails: PasswordForgetPayload) =>
     axiosInstance.post('user/forget-password/', loginUserDetails, {});
 
 const getMyContributions = () =>
-    axiosInstance.get('user/my-contributions/', {headers: {JWT: true}});
-
+    axiosInstance.get('user/my-contributions/', { headers: { JWT: true } });
 
 export const userApi = {
     registerUser,
     loginUser,
     forgetPassword,
-    getMyContributions
+    getMyContributions,
 };

@@ -28,7 +28,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }, []);
 
     const login = async (token: string) => {
-        console.log('--YES--');
     };
 
     const logout = () => {

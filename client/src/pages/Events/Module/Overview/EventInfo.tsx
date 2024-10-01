@@ -1,6 +1,6 @@
 import { Drawer, Grid, Stack, Typography } from '@mui/material';
 import EventFiDashboardCard from '../../../../components/EventFiCard/EventFiDashboardCard';
-import {  Pen, Trash } from 'lucide-react';
+import { Pen, Trash } from 'lucide-react';
 import { format } from 'date-fns';
 import { useSelector } from 'react-redux';
 import { selectEventDetail } from '../../../../store/modules/event/selector';
@@ -22,7 +22,12 @@ const EventInfo = () => {
                 borderColor="divider"
                 sx={{ height: '100%', minHeight: '400px' }}
             >
-                <Stack direction="row" alignItems="center" mb={2} justifyContent={'space-between'}>
+                <Stack
+                    direction="row"
+                    alignItems="center"
+                    mb={2}
+                    justifyContent={'space-between'}
+                >
                     <Stack direction={'row'} alignItems={'center'}>
                         <Typography variant="h5" mr={1}>
                             Event Info
@@ -34,10 +39,10 @@ const EventInfo = () => {
                         />
                     </Stack>
                     <Stack>
-                        <Trash 
-                            size={14} 
-                            onClick={() => setOpenDeleteModal(true)}  
-                            color='red' 
+                        <Trash
+                            size={14}
+                            onClick={() => setOpenDeleteModal(true)}
+                            color="red"
                             style={{
                                 cursor: 'pointer',
                             }}
@@ -48,17 +53,28 @@ const EventInfo = () => {
                     <>
                         <Grid container spacing={2}>
                             <Grid item xs={6}>
-                                <Typography variant="subtitle2">Name</Typography>
-                                <Typography variant="body1">{data.name}</Typography>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Typography variant="subtitle2">Date</Typography>
+                                <Typography variant="subtitle2">
+                                    Name
+                                </Typography>
                                 <Typography variant="body1">
-                                    {format(new Date(data.date), 'dd EEEE yyyy')}
+                                    {data.name}
                                 </Typography>
                             </Grid>
                             <Grid item xs={6}>
-                                <Typography variant="subtitle2">Address</Typography>
+                                <Typography variant="subtitle2">
+                                    Date
+                                </Typography>
+                                <Typography variant="body1">
+                                    {format(
+                                        new Date(data.date),
+                                        'dd EEEE yyyy'
+                                    )}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography variant="subtitle2">
+                                    Address
+                                </Typography>
                                 <Typography variant="body1">
                                     {data.address}
                                 </Typography>
@@ -74,11 +90,17 @@ const EventInfo = () => {
                                 </Grid>
                             )}
                             <Grid item xs={6}>
-                                <Typography variant="subtitle2">City</Typography>
-                                <Typography variant="body1">{data.city}</Typography>
+                                <Typography variant="subtitle2">
+                                    City
+                                </Typography>
+                                <Typography variant="body1">
+                                    {data.city}
+                                </Typography>
                             </Grid>
                             <Grid item xs={6}>
-                                <Typography variant="subtitle2">State</Typography>
+                                <Typography variant="subtitle2">
+                                    State
+                                </Typography>
                                 <Typography variant="body1">
                                     {data.state}
                                 </Typography>
@@ -92,7 +114,9 @@ const EventInfo = () => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={6}>
-                                <Typography variant="subtitle2">Country</Typography>
+                                <Typography variant="subtitle2">
+                                    Country
+                                </Typography>
                                 <Typography variant="body1">
                                     {data.country}
                                 </Typography>
@@ -109,7 +133,7 @@ const EventInfo = () => {
                                 eventData={data}
                             />
                         </Drawer>
-                        <EventDeleteModal 
+                        <EventDeleteModal
                             open={openDeleteModal}
                             onClose={() => setOpenDeleteModal(false)}
                             event_id={data?.id}

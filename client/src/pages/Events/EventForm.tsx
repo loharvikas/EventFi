@@ -8,7 +8,6 @@ import { createEvent, updateEvent } from '../../store/modules/event/slice';
 
 import { Event } from '../../types/event';
 
-
 interface EventCreateUpdateFormProps {
     onClose: () => void;
     mode?: 'create' | 'edit';
@@ -23,7 +22,7 @@ const EventCreateUpdateForm: React.FC<EventCreateUpdateFormProps> = ({
     const dispatch = useAppDispatch();
     const isEditMode = mode === 'edit';
 
-    const getEventDataFromForm = (data: FormData)=> ({
+    const getEventDataFromForm = (data: FormData) => ({
         name: data.get('eventName') as string,
         date: data.get('eventDate') as string,
         address: data.get('addressLine1') as string,

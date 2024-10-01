@@ -18,11 +18,11 @@ const ForgotPassword = () => {
     const [emailError, setEmailError] = useState<boolean>(false);
     const [emailErrorMessage, setEmailErrorMessage] = useState<string>('');
     const [passwordError, setPasswordError] = useState<boolean>(false);
-    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string>('');
+    const [passwordErrorMessage, setPasswordErrorMessage] =
+        useState<string>('');
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -37,19 +37,24 @@ const ForgotPassword = () => {
                     password: data.get('newPassword') as string,
                 })
             ).unwrap();
-    
-            dispatch(showAlert({
-                message: 'Password has been reset successfully. Please login',
-                type: 'success',
-            }));
-    
+
+            dispatch(
+                showAlert({
+                    message:
+                        'Password has been reset successfully. Please login',
+                    type: 'success',
+                })
+            );
+
             navigate('/signin');
         } catch (error: any) {
-            console.log('---ERROR--', error)
-            dispatch(showAlert({
-                message: error || 'Failed to reset password. Please try again.',
-                type: 'failure',
-            }));
+            dispatch(
+                showAlert({
+                    message:
+                        error || 'Failed to reset password. Please try again.',
+                    type: 'failure',
+                })
+            );
         }
     };
 
@@ -118,7 +123,9 @@ const ForgotPassword = () => {
                         />
                     </FormControl>
                     <FormControl>
-                        <FormLabel htmlFor="newPassword">New Password</FormLabel>
+                        <FormLabel htmlFor="newPassword">
+                            New Password
+                        </FormLabel>
                         <EventFiTextField
                             error={passwordError}
                             helperText={passwordErrorMessage}
@@ -145,7 +152,6 @@ const ForgotPassword = () => {
             </EventFiCard>
         </Stack>
     );
-}
+};
 
-
-export default ForgotPassword
+export default ForgotPassword;

@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { requestState } from '../../../utils/enums';
 import { eventAPI } from '../../../apis/event';
-import { CreateEventPayload, EventStat, UpdateEventPayload } from '../../../types/event';
+import {
+    CreateEventPayload,
+    EventStat,
+    UpdateEventPayload,
+} from '../../../types/event';
 import { Contribution } from '../../../types/guest';
 import { Event } from '../../../types/event';
 
@@ -42,7 +46,7 @@ interface EventStoreState {
         data: EventStat;
         error: string | null;
         status: requestState;
-    }
+    };
 }
 
 const initialState: EventStoreState = {
@@ -85,7 +89,7 @@ const initialState: EventStoreState = {
         },
         status: requestState.idle,
         error: null,
-    }
+    },
 };
 
 export const getEvents = createAsyncThunk(
@@ -238,7 +242,7 @@ const eventSlice = createSlice({
                 state.eventDetail.data = action.payload;
                 state.updateEvent.error = null;
             })
-            
+
             .addCase(updateEvent.rejected, (state, action) => {
                 state.updateEvent.status = requestState.failed;
                 state.updateEvent.error = action.error.message || null;
@@ -250,10 +254,12 @@ const eventSlice = createSlice({
             .addCase(deleteEvent.fulfilled, (state, action) => {
                 state.deleteEvent.status = requestState.success;
                 state.eventDetail.data = null;
-                state.events.data = state.events.data.filter((event) => event.id !== action.payload.id);
+                state.events.data = state.events.data.filter(
+                    (event) => event.id !== action.payload.id
+                );
                 state.deleteEvent.error = null;
             })
-            
+
             .addCase(deleteEvent.rejected, (state, action) => {
                 state.deleteEvent.status = requestState.failed;
                 state.deleteEvent.error = action.error.message || null;
@@ -296,7 +302,7 @@ const eventSlice = createSlice({
             .addCase(getEventStat.rejected, (state, action) => {
                 state.stat.status = requestState.failed;
                 state.stat.error = action.error.message || null;
-            })
+            });
     },
 });
 

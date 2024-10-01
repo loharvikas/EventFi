@@ -20,7 +20,6 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
     const [passwordError, setPasswordError] = useState(false);
     const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
 
-
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
@@ -109,7 +108,7 @@ export default function Signin(props: { disableCustomTheme?: boolean }) {
                             }}
                         >
                             <FormLabel htmlFor="password">Password</FormLabel>
-                            <a  onClick={() => navigate('/forgotpassword')}>
+                            <a onClick={() => navigate('/forgotpassword')}>
                                 Forgot your password?
                             </a>
                         </Box>
