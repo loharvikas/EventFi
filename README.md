@@ -83,6 +83,12 @@ After completing the contribution, guests are directed to a Thank You page to co
 
 ![Screenshot 2024-10-01 at 3 33 23 PM](https://github.com/user-attachments/assets/dfbea00a-8a88-4c40-9edc-fcc07b5945aa)
 
+### 11. Forget Password
+Go to **Forgot you password** link in Login page in order to reset your password.
+
+![Screenshot 2024-10-01 at 4 54 55 PM](https://github.com/user-attachments/assets/327871b4-d1e1-49c8-bf45-670827b173cd)
+
+
 
 ---
 
