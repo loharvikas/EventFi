@@ -13,6 +13,7 @@ django-sendgrid = "*"
 django-sendgrid-v5 = "*"
 certifi = "*"
 resend = "*"
+django-environ = "*"
 
 [dev-packages]
 
