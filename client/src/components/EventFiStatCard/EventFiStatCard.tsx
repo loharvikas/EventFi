@@ -12,7 +12,7 @@ import EventFiDashboardCard from '../EventFiCard/EventFiDashboardCard';
 
 export type EventFiStatCardProps = {
     title: string;
-    value: string;
+    value: string | number;
     interval: string;
     trend: 'up' | 'down' | 'neutral';
     data: number[];

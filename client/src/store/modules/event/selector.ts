@@ -22,3 +22,8 @@ export const selectEventDetail = createSelector(
     [selectEventState],
     (eventState) => eventState.eventDetail
 );
+
+export const selectEventStat = createSelector(
+    [selectEventState],
+    (eventState) => eventState.stat
+);

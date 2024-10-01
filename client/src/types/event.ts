@@ -34,3 +34,8 @@ export interface UpdateEventPayload {
     country?: string;
     id?: string;
 }
+
+export interface EventStat {
+    total_contribution: number;
+    average_contribution: number;
+}

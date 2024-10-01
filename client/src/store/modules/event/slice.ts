@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { requestState } from '../../../utils/enums';
 import { eventAPI } from '../../../apis/event';
-import { CreateEventPayload, UpdateEventPayload } from '../../../types/event';
+import { CreateEventPayload, EventStat, UpdateEventPayload } from '../../../types/event';
 import { Contribution } from '../../../types/guest';
 import { Event } from '../../../types/event';
 
@@ -38,6 +38,11 @@ interface EventStoreState {
         error: string | null;
         status: requestState;
     };
+    stat: {
+        data: EventStat;
+        error: string | null;
+        status: requestState;
+    }
 }
 
 const initialState: EventStoreState = {
@@ -73,6 +78,14 @@ const initialState: EventStoreState = {
         status: requestState.idle,
         error: null,
     },
+    stat: {
+        data: {
+            total_contribution: 0,
+            average_contribution: 0,
+        },
+        status: requestState.idle,
+        error: null,
+    }
 };
 
 export const getEvents = createAsyncThunk(
@@ -152,6 +165,18 @@ export const deleteEvent = createAsyncThunk(
     async (event_id: string, { rejectWithValue }) => {
         try {
             const response = await eventAPI.deleteEvent(event_id);
+            return response.data;
+        } catch (error: any) {
+            throw rejectWithValue(error.message);
+        }
+    }
+);
+
+export const getEventStat = createAsyncThunk(
+    'event/getEventStat',
+    async (event_id: string, { rejectWithValue }) => {
+        try {
+            const response = await eventAPI.getEventStat(event_id);
             return response.data;
         } catch (error: any) {
             throw rejectWithValue(error.message);
@@ -258,7 +283,20 @@ const eventSlice = createSlice({
             .addCase(getContributions.rejected, (state, action) => {
                 state.contributions.status = requestState.failed;
                 state.contributions.error = action.error.message || null;
-            });
+            })
+            .addCase(getEventStat.pending, (state) => {
+                state.stat.status = requestState.loading;
+                state.stat.error = null;
+            })
+            .addCase(getEventStat.fulfilled, (state, action) => {
+                state.stat.status = requestState.success;
+                state.stat.data = action.payload;
+                state.stat.error = null;
+            })
+            .addCase(getEventStat.rejected, (state, action) => {
+                state.stat.status = requestState.failed;
+                state.stat.error = action.error.message || null;
+            })
     },
 });
 

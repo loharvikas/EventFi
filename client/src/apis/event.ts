@@ -27,6 +27,9 @@ const updateEvent = (event: UpdateEventPayload) =>
 const deleteEvent = (event_id: string) =>
     axiosInstance.delete(`events/${event_id}/`, { headers: { JWT: 'true' } });
 
+const getEventStat = (event_id: string) =>
+    axiosInstance.get(`events/${event_id}/stats`, { headers: { JWT: 'true' } });
+
 export const eventAPI = {
     getEvents,
     createEvent,
@@ -34,5 +37,6 @@ export const eventAPI = {
     getContributions,
     getEventDetail,
     updateEvent,
-    deleteEvent
+    deleteEvent,
+    getEventStat,
 };
