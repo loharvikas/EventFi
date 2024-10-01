@@ -1,6 +1,6 @@
 # EventFi
 
-**EventFi** is a comprehensive event and gift management platform designed to simplify the process of organizing events, managing guest lists, sending invitations, and handling contributions. From weddings to corporate events, EventFi helps streamline the entire process from planning to payment.
+**EventFi** is a comprehensive event and gift management platform designed to simplify the process of organizing events, managing guest lists, sending invitations, and handling contributions.
 
 ## Key Features
 
