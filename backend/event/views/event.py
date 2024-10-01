@@ -4,7 +4,7 @@ from rest_framework import status
 from guest.serializers.guest import ContributionSerializer
 from guest.services.guest import ContributionService
 from event.services.event import EventService
-from event.serializers.event import EventCreateSerializer, EventUpdateSerializer, EventRetrieveSerializer
+from event.serializers.event import EventCreateSerializer, EventStatSerializer, EventUpdateSerializer, EventRetrieveSerializer
 
 class EventCreateView(APIView):
 
@@ -52,6 +52,12 @@ class EventRetrieveUpdateDeleteView(APIView):
         return Response({"detail": event_id}, status=status.HTTP_204_NO_CONTENT)
 
 
+class EventStatView(APIView):
+    def get(self, request, event_id:str,):
+        stat = EventService.get_stat(event_id)
+        print('--RES-', stat)
+        serializer = EventStatSerializer(stat)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class EventTopContributorView(APIView):

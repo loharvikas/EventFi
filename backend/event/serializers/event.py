@@ -31,3 +31,9 @@ class EventRetrieveSerializer(serializers.Serializer):
     zip_code = serializers.CharField(max_length=255)
     country = serializers.CharField(max_length=255)
     created_by = serializers.CharField(source='created_by.email')
+
+
+class EventStatSerializer(serializers.Serializer):
+    total_contribution = serializers.DecimalField(max_digits=10, decimal_places=2)
+    average_contribution = serializers.DecimalField(max_digits=10, decimal_places=2)
+    

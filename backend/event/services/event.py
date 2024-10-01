@@ -1,7 +1,9 @@
+from guest.services.guest import ContributionService
 from user.models import User
 from event.models import Event
 from typing import Optional, List
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Sum
 
 class EventService:
 
@@ -80,3 +82,15 @@ class EventService:
     def get_all() -> List[Event]:
         """Returns a list of all events."""
         return list(Event.objects.all())
+
+
+    @staticmethod
+    def get_stat(id: str) -> Optional[Event]:
+        """Returns the event's statistics."""
+        contributions = ContributionService.get_contributions_by_event(id)
+        total_contribution = contributions.aggregate(total=Sum('amount'))['total']
+        average_contribution = (total_contribution / len(contributions))
+        return {
+            'total_contribution': total_contribution,
+            'average_contribution': average_contribution
+        }
