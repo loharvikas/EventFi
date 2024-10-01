@@ -2,6 +2,7 @@
 
 **EventFi** is a comprehensive event and gift management platform designed to simplify the process of organizing events, managing guest lists, sending invitations, and handling contributions.
 
+**Architecture** [https://github.com/loharvikas/EventFi/blob/main/DesignSystem.md]
 ## Key Features
 
 ### 1. Register Page
