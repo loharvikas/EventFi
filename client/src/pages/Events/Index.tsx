@@ -26,8 +26,6 @@ const Events = () => {
                     />
                 </Stack>
             </Stack>
-            {/* <EventFiModal open={openEventForm} onClose={() => setOpenEventForm(false)}>
-            </EventFiModal> */}
             <Drawer
                 open={openEventForm}
                 onClose={() => setOpenEventForm(false)}

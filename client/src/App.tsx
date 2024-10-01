@@ -68,19 +68,19 @@ function App() {
                         <Route path="forgotpassword" element={<ForgotPassword />} />
                         <Route path="signin" element={<Signin />} />
                         <Route path="signup" element={<Singup />} />
-                        <Route
-                            path="events/:id/:guestId/contribute"
-                            element={<Contribute />}
-                        />
-                        <Route
-                            path="events/:id/:guestId/contribute/pay"
-                            element={<Payment />}
-                        />
                     </Route>
+                    <Route
+                        path="events/:id/:guestId/contribute"
+                        element={<Contribute />}
+                    />
+                    <Route
+                        path="events/:id/:guestId/contribute/pay"
+                        element={<Payment />}
+                    />
                     <Route element={<PrivateRoute />}>
                         <Route element={<Layout sidebarItems={sidebarItems} />}>
                             <Route path='contribution' element={<Contribution />} />
-                            <Route index element={<Home />} />
+                            <Route index element={<Events />} />
                             <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/events" element={<Events />} />
                             <Route
